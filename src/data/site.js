@@ -35,19 +35,23 @@ export const site = {
   logo: '/heartofart-logo.png',
 }
 
-// REPLACE: artist name, portrait and first-person story.
+// The name, portrait and statement here are real. The process steps further
+// down are still invented — REPLACE those.
 export const artist = {
   name: 'Dereck Kariuki',
   role: 'Charcoal on paper, paint on canvas',
   location: 'Nairobi, Kenya',
   portrait: '/images/artist/dereck-kariuki-portrait-nairobi.jpg',
   portraitAlt: 'Dereck Kariuki, photographed outdoors in Nairobi',
+  // The opening of the statement. The home page shows this much and links
+  // through to About, which carries the whole thing — so the two are not the
+  // same words twice and "Read the full story" leads somewhere.
   shortBio:
-    'I have worked from the same third-floor room in Nairobi for nine years. Every piece starts in charcoal and most of them end in paint — the drawing underneath is what holds the feeling, and the colour is what lets anyone else see it.',
+    'Artist behind HeartOfArt. Sharp, creative, and driven by quality — every piece is made with intention, never for its own sake.',
+  // The statement in full. The first entry is set large; the rest follow it.
   story: [
-    'I did not set out to be a painter. I trained as an architect, and for four years I drew buildings that were never built. What stayed with me from that time was light: how it falls across a room at four in the afternoon, how it changes the colour of a wall you have walked past a thousand times.',
-    'I started drawing on the floor of a rented room in Ngara because I wanted to keep that light somewhere. Charcoal came first, because charcoal was what I could afford — and it turned out to be the honest material, the one where a bad line has nowhere to hide. The paint came later, when the drawing alone stopped being enough to hold the colour of an afternoon.',
-    'What I am after is not a likeness of a place. It is the feeling of standing in one — the warmth still coming off a wall after the sun has gone, the particular quiet of a room where someone has just left.',
+    'Artist behind HeartOfArt. Sharp, creative, and driven by quality — every piece is made with intention, never for its own sake.',
+    'I work from the heart, with the kind of passion and focus that turns an idea into something you feel before you understand it. Because the true measure of a piece isn’t how it looks. It’s what stays with you long after you’ve walked away.',
   ],
   // REPLACE: your own process steps and detail shots.
   process: [

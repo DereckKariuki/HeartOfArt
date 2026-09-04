@@ -155,10 +155,11 @@ that whole section drops out of the commissions page cleanly.
 
 Everything below is currently placeholder and marked `REPLACE:` in the data files.
 
-- **The artist's story.** `site.js` → `artist.story` and `artist.shortBio` are
-  still invented first-person biography — an architecture training, a rented
-  room in Ngara — now sitting under a real name and face. Rewrite them before
-  this goes anywhere near a visitor.
+- **The four process steps** in `site.js` → `artist.process` are still
+  invented, and they make specific claims about how you work — a warm
+  underpainting left to dry for two days, a dozen cycles of charcoal over
+  paint. Under a real name those read as fact. Rewrite or delete them; the
+  name, portrait and statement above them are already real.
 - **Exhibitions, press and collections** ship empty. They held invented entries
   naming real galleries and museums, which under a real name would be false
   claims a collector could check. Add real ones and the Record section
