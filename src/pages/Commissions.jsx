@@ -208,7 +208,7 @@ export default function Commissions() {
   usePageMeta({
     title: 'Commissions',
     description:
-      'Commission an original mixed-media painting from Amani Wachira in Nairobi. Three size tiers from KES 45,000, four to sixteen weeks, framing and delivery included.',
+      'Commission an original charcoal or painted work from Amani Wachira in Nairobi. Three size tiers from KES 45,000, four to sixteen weeks, framing and delivery included.',
   })
 
   return (

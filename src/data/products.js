@@ -70,7 +70,7 @@ export const prints = [
     status: 'available',
     edition: 'Limited edition of 50 per size. Numbered and signed in pencil in the margin.',
     description:
-      'Printed from a 100-megapixel capture of the original, so the collage edges and the grain of the paper stay legible. A 4 cm unprinted margin is left on every size for framing.',
+      'Printed from a 100-megapixel capture of the original, so the charcoal grain and the tooth of the paper stay legible. A 4 cm unprinted margin is left on every size for framing.',
     sizes: [
       { id: 'a3', label: 'A3 — 42 × 30 cm', price: 8000 },
       { id: 'a2', label: 'A2 — 59 × 42 cm', price: 14000 },

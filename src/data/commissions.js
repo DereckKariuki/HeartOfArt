@@ -84,14 +84,14 @@ export const progressGallery = [
     caption: 'Week 1 — underpainting',
   },
   {
-    src: '/images/commission-progress/karen-diptych-02-collage-layer.jpg',
-    alt: 'Commission in progress: collage papers pressed into the second layer',
-    caption: 'Week 4 — collage layer',
+    src: '/images/commission-progress/karen-diptych-02-first-paint-layer.jpg',
+    alt: 'Commission in progress: the first layer of paint going over the charcoal drawing',
+    caption: 'Week 4 — first paint layer',
   },
   {
-    src: '/images/commission-progress/karen-diptych-03-oil-pastel.jpg',
-    alt: 'Commission in progress: oil pastel worked over the painted surface',
-    caption: 'Week 7 — oil pastel',
+    src: '/images/commission-progress/karen-diptych-03-charcoal-over-paint.jpg',
+    alt: 'Commission in progress: charcoal worked back over the painted surface',
+    caption: 'Week 7 — charcoal over paint',
   },
   {
     src: '/images/commission-progress/karen-diptych-04-installed.jpg',

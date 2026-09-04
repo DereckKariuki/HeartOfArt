@@ -16,7 +16,7 @@ export const site = {
   heroLine:
     'Charcoal on paper, paint on canvas, all this to capture emotions, feelings, and stories that connect with the Heart.',
   description:
-    'HeartOfArt is the studio of Amani Wachira, a mixed-media painter in Nairobi. Original paintings, limited prints and commissioned work.',
+    'HeartOfArt is the studio of Amani Wachira, working in charcoal on paper and paint on canvas in Nairobi. Original work, limited prints and commissions.',
   founded: 2016,
   city: 'Nairobi, Kenya',
   // REPLACE: the circular brand mark. Save the file as
@@ -29,25 +29,25 @@ export const site = {
 // REPLACE: artist name, portrait and first-person story.
 export const artist = {
   name: 'Amani Wachira',
-  role: 'Painter — acrylic, oil pastel and paper collage on canvas',
+  role: 'Charcoal on paper, paint on canvas',
   location: 'Nairobi, Kenya',
   portrait: '/images/artist/amani-wachira-portrait-studio-nairobi.jpg',
   portraitAlt:
     'Amani Wachira in the Nairobi studio, standing beside an unfinished canvas',
   shortBio:
-    'I have painted from the same third-floor room in Nairobi for nine years. The work begins with paper — receipts, kanga offcuts, newsprint — pressed into acrylic until the surface holds a memory of the street it came from.',
+    'I have worked from the same third-floor room in Nairobi for nine years. Every piece starts in charcoal and most of them end in paint — the drawing underneath is what holds the feeling, and the colour is what lets anyone else see it.',
   story: [
     'I did not set out to be a painter. I trained as an architect, and for four years I drew buildings that were never built. What stayed with me from that time was light: how it falls across a room at four in the afternoon, how it changes the colour of a wall you have walked past a thousand times.',
-    'I started painting on the floor of a rented room in Ngara because I wanted to keep that light somewhere. The collage came later, almost by accident — I ran out of white and reached for a newspaper. Now every piece begins with paper gathered close to home: matatu tickets, fabric offcuts from Kariokor, pages from books I could not finish.',
+    'I started drawing on the floor of a rented room in Ngara because I wanted to keep that light somewhere. Charcoal came first, because charcoal was what I could afford — and it turned out to be the honest material, the one where a bad line has nowhere to hide. The paint came later, when the drawing alone stopped being enough to hold the colour of an afternoon.',
     'What I am after is not a likeness of a place. It is the feeling of standing in one — the warmth still coming off a wall after the sun has gone, the particular quiet of a room where someone has just left.',
   ],
   // REPLACE: your own process steps and detail shots.
   process: [
     {
-      title: 'Gathering',
-      body: 'Paper is collected over weeks — ticket stubs, fabric offcuts, printed pages. Nothing is bought for the purpose.',
-      image: '/images/process/collected-paper-and-fabric-offcuts.jpg',
-      alt: 'Collected paper, tickets and fabric offcuts laid out on a studio table',
+      title: 'Drawing',
+      body: 'Everything begins in charcoal on paper, from life or from memory. Many pieces never go further than this, and are the better for it.',
+      image: '/images/process/charcoal-drawing-on-paper-from-life.jpg',
+      alt: 'A charcoal drawing in progress on paper, pinned to a studio wall',
     },
     {
       title: 'Ground',
@@ -57,15 +57,15 @@ export const artist = {
     },
     {
       title: 'Building',
-      body: 'Paper is pressed into wet acrylic, sanded back, then painted over. A piece may go through this cycle a dozen times.',
-      image: '/images/process/paper-collage-pressed-into-wet-acrylic.jpg',
-      alt: 'Hands pressing torn paper into a wet layer of acrylic paint',
+      body: 'The drawing goes down onto that ground in charcoal, then paint over it, then charcoal again. A piece may go through the cycle a dozen times.',
+      image: '/images/process/charcoal-drawn-over-wet-paint-on-canvas.jpg',
+      alt: 'Hands drawing in charcoal over a wet layer of paint on canvas',
     },
     {
       title: 'Finishing',
-      body: 'Oil pastel goes on last, worked in by hand. The piece rests facing the wall for a week before I decide it is done.',
-      image: '/images/process/oil-pastel-detail-worked-by-hand.jpg',
-      alt: 'Close detail of oil pastel marks worked over a painted surface',
+      body: 'The last marks are charcoal, worked in by hand and fixed. The piece rests facing the wall for a week before I decide it is done.',
+      image: '/images/process/charcoal-detail-worked-by-hand.jpg',
+      alt: 'Close detail of charcoal marks worked over a painted surface',
     },
   ],
 }

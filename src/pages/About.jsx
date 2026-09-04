@@ -167,7 +167,7 @@ function Close() {
 export default function About() {
   usePageMeta({
     title: `About — ${artist.name}`,
-    description: `${artist.name} is a mixed-media painter working in acrylic, oil pastel and paper collage in Nairobi, Kenya. The story behind the work, the studio process, exhibitions and press.`,
+    description: `${artist.name} works in charcoal on paper and paint on canvas in Nairobi, Kenya. The story behind the work, the studio process, exhibitions and press.`,
   })
 
   return (

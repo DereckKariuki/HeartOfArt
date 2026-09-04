@@ -12,7 +12,7 @@ const TABS = [
 export default function Shop() {
   usePageMeta({
     title: 'Shop — originals and limited prints',
-    description: `Original mixed-media paintings and signed limited-edition giclée prints by Amani Wachira, from KES ${priceFloor.toLocaleString('en-KE')}. Delivered in Nairobi, countrywide and internationally.`,
+    description: `Original charcoal and paint works and signed limited-edition giclée prints by Amani Wachira, from KES ${priceFloor.toLocaleString('en-KE')}. Delivered in Nairobi, countrywide and internationally.`,
   })
 
   const [active, setActive] = useState('originals')
