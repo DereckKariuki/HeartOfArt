@@ -95,6 +95,13 @@ pre-crop it to a circle. The page masks it round in CSS (`Logo.jsx`), so the
 square file keeps working if the shape ever changes, and the gold ring survives
 the mask.
 
+The committed file is 512×512 and palette-quantised, 164 KB. It renders at
+48px at most (88px in the footer), so a full-resolution master is many times
+larger than anything the browser can use — and the logo loads on every page,
+which on a metered Kenyan mobile connection is the wrong place to spend
+megabytes. If you replace it, downscale to 512 and optimise first. The
+original 1254×1254 upload is preserved in git history at commit `62d516a`.
+
 Once that file exists it appears in three places automatically: the header
 (40px on phones, 48px from `md` up), the footer (88px), and the browser tab.
 
