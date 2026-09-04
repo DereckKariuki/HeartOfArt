@@ -91,7 +91,7 @@ function Featured() {
       <SectionHeading
         eyebrow="A short selection"
         title="Work currently in the studio"
-        standfirst="Five pieces from three ongoing series. The full collection runs to a little over forty."
+        standfirst="Some of the recent works. These represent current exploration."
         action={
           <Button to="/portfolio" variant="quiet" className="gap-3">
             All work
