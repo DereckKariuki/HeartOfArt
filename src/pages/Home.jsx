@@ -231,7 +231,7 @@ function Newsletter() {
 export default function Home() {
   usePageMeta({
     title: 'Contemporary paintings from Nairobi',
-    description: `${site.tagline} Original mixed-media paintings, limited prints and commissioned work by ${artist.name}, from ${priceFloor.toLocaleString('en-KE')} KES.`,
+    description: `${site.tagline}. Original mixed-media paintings, limited prints and commissioned work by ${artist.name}, from ${priceFloor.toLocaleString('en-KE')} KES.`,
   })
 
   return (

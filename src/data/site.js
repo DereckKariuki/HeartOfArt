@@ -12,7 +12,7 @@ export const site = {
   name: 'HeartOfArt',
   // The wordmark is split so "Heart" and "Art" can be weighted differently.
   wordmark: { first: 'Heart', middle: 'Of', last: 'Art' },
-  tagline: 'Paintings that hold the light of a Nairobi afternoon.',
+  tagline: 'Art is not art if it makes you feel nothing',
   heroLine:
     'Layered acrylic and paper on canvas — quiet interiors, market mornings, and the people who move through them.',
   description:
