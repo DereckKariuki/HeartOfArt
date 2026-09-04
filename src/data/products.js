@@ -59,14 +59,14 @@ export const originals = originalSource.map((piece) => ({
 // REPLACE: the print catalogue, edition sizes and per-size prices.
 export const prints = [
   {
-    id: 'print-four-oclock-wall',
+    id: 'print-ocean-view',
     kind: 'print',
-    artworkId: 'four-oclock-wall',
-    title: 'Four O’Clock Wall',
-    year: 2025,
+    artworkId: 'ocean-view',
+    title: 'Ocean View',
+    year: 2026,
     collection: 'Afternoon Rooms',
     medium: 'Giclée on 310gsm cotton rag',
-    ratio: '4/3',
+    ratio: '3/2',
     status: 'available',
     edition: 'Limited edition of 50 per size. Numbered and signed in pencil in the margin.',
     description:
@@ -78,18 +78,18 @@ export const prints = [
     ],
     images: [
       {
-        src: '/images/print/four-oclock-wall-giclee-print-on-cotton-rag.jpg',
-        alt: 'Four O’Clock Wall giclée print on cotton rag paper, showing the unprinted margin',
+        src: '/images/print/ocean-view-giclee-print-on-cotton-rag.jpg',
+        alt: 'Ocean View giclée print on cotton rag paper, showing the unprinted margin',
         caption: 'The print',
       },
       {
-        src: '/images/print/four-oclock-wall-giclee-print-framed-oak.jpg',
-        alt: 'Four O’Clock Wall print in a natural oak frame against a pale wall',
+        src: '/images/print/ocean-view-giclee-print-framed-oak.jpg',
+        alt: 'Ocean View print in a natural oak frame against a pale wall',
         caption: 'Framed in oak',
       },
       {
-        src: '/images/print/four-oclock-wall-giclee-print-in-situ.jpg',
-        alt: 'Four O’Clock Wall print hung above a desk in a sunlit room, showing scale',
+        src: '/images/print/ocean-view-giclee-print-in-situ.jpg',
+        alt: 'Ocean View print hung above a desk in a sunlit room, showing scale',
         caption: 'In a room',
       },
     ],

@@ -15,9 +15,11 @@ import Wordmark from '../components/ui/Wordmark'
 import NewsletterForm from '../components/forms/NewsletterForm'
 
 function Hero() {
-  // No caption on the stand-in: a full-bleed hero has type over it, and a
-  // label baked into the placeholder would read as part of the design.
-  const image = useImageSrc(heroArtwork.image, {
+  // The hero has its own image, separate from the hero artwork's flat shot:
+  // an in-situ photograph carries scale at full bleed. No caption on the
+  // stand-in — a label baked into the placeholder would read as part of the
+  // design under the type.
+  const image = useImageSrc(site.heroImage, {
     seed: heroArtwork.id,
     label: '',
     ratio: '16/9',
@@ -28,17 +30,23 @@ function Hero() {
       <img
         src={image.src}
         onError={image.onError}
-        alt={artworkAlt(heroArtwork)}
+        alt={site.heroImageAlt}
         fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover opacity-90"
       />
       {/* Scrim: the type sits in the lower third, so the weight sits there too. */}
+      {/* Two scrims, not one. The vertical pass seats the type block at the
+          bottom; the horizontal pass weights the left, where the type sits,
+          and lifts off the right so the work itself stays legible instead of
+          being flattened under an even wash. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-ink/30"
+        className="absolute inset-0 bg-ink/20"
         style={{
-          backgroundImage:
-            'linear-gradient(to top, rgba(26,25,24,0.92) 0%, rgba(26,25,24,0.66) 34%, rgba(26,25,24,0.18) 68%, rgba(26,25,24,0.05) 100%)',
+          backgroundImage: [
+            'linear-gradient(to top, rgba(26,25,24,0.90) 0%, rgba(26,25,24,0.60) 32%, rgba(26,25,24,0.14) 66%, rgba(26,25,24,0.04) 100%)',
+            'linear-gradient(to right, rgba(26,25,24,0.62) 0%, rgba(26,25,24,0.34) 38%, rgba(26,25,24,0.06) 68%, rgba(26,25,24,0) 100%)',
+          ].join(', '),
         }}
       />
 

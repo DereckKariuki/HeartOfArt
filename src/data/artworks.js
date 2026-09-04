@@ -27,17 +27,18 @@ export const STATUSES = [
 
 export const artworks = [
   {
-    id: 'four-oclock-wall',
-    title: 'Four O’Clock Wall',
-    year: 2025,
+    id: 'ocean-view',
+    title: 'Ocean View',
+    year: 2026,
     collection: 'Afternoon Rooms',
-    medium: 'Charcoal and paint on canvas',
-    dimensions: '120 × 90 cm',
-    ratio: '4/3',
+    medium: 'Paint on canvas',
+    dimensions: '30 × 20 cm',
+    ratio: '3/2',
     status: 'available',
     price: 148000,
-    note: 'The east wall of the studio at the hour the light gives up. Built up and wiped back over eleven sittings — the charcoal drawing underneath still shows through the thinnest passages.',
-    image: '/images/artwork/four-oclock-wall-charcoal-and-paint-on-canvas.jpg',
+    // REPLACE: a note in the artist's voice about this piece.
+    note: 'Surf coming in over red sand, painted small and close. The horizon sits high on purpose — most of the canvas is given to the water rather than the sky.',
+    image: '/images/artwork/ocean-view-paint-on-canvas.jpg',
     featured: true,
     hero: true,
   },
@@ -172,8 +173,8 @@ export const artworks = [
     image: '/images/artwork/unfinished-letter-charcoal-on-paper.jpg',
   },
   {
-    id: 'study-for-four-oclock',
-    title: 'Study for Four O’Clock',
+    id: 'study-for-ocean-view',
+    title: 'Study for Ocean View',
     year: 2024,
     collection: 'Paper Weather',
     medium: 'Charcoal on paper',
@@ -182,7 +183,7 @@ export const artworks = [
     status: 'available',
     price: 18000,
     note: 'One of five studies for the larger canvas. Small, and the one I nearly kept.',
-    image: '/images/artwork/study-for-four-oclock-charcoal-on-paper.jpg',
+    image: '/images/artwork/study-for-ocean-view-charcoal-on-paper.jpg',
   },
 ]
 

@@ -128,10 +128,14 @@ descriptive on purpose, and they are what image search reads.
 | 11 | Each original in a frame | `products.js` (derived) | 4:3, plain wall |
 | 11 | Each original in a room | `products.js` (derived) | 4:3, shows scale |
 | 12 | Prints — flat, framed, in a room (4 editions × 3) | `products.js` → `prints[].images` | flat = the print's ratio; other two 4:3 |
+| 1 | Home hero background | `site.js` → `heroImage` | landscape, 1600px+ — an in-situ shot reads best at full bleed |
 | 1 | Artist portrait | `site.js` → `artist.portrait` | ≥3000px wide — used both at 4:5 and full-bleed 16:9 |
 | 4 | Studio process details | `site.js` → `artist.process` | 1:1 |
 | 1 | Commission hero | `commissions.js` → `commissionHero` | 16:9, landscape, an installed past commission |
 | 4 | Commission progress | `commissions.js` → `progressGallery` | 4:5 |
+
+`Ocean View`'s in-situ photograph is supplied and doubles as the home hero,
+so that one is done. Every other path in the table is still a stand-in.
 
 The portfolio grid crops every piece to a shared 4:5 so the page reads as a
 hang; the lightbox uses each piece's true `ratio`, so set that per piece.

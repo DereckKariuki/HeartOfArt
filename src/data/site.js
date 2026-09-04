@@ -19,6 +19,15 @@ export const site = {
     'HeartOfArt is the studio of Amani Wachira, working in charcoal on paper and paint on canvas in Nairobi. Original work, limited prints and commissions.',
   founded: 2016,
   city: 'Nairobi, Kenya',
+  // REPLACE: the full-bleed image behind the top of the home page.
+  // Deliberately an in-situ photograph rather than a flat shot of the work: a
+  // room reads at full bleed and gives a visitor the scale straight away,
+  // where a flat shot belongs in the portfolio grid. Landscape, 1600px wide or
+  // more. The credit line in the corner is taken from the hero artwork in
+  // artworks.js, so keep the two describing the same piece.
+  heroImage: '/images/artwork-in-situ/ocean-view-paint-on-canvas-in-situ.jpg',
+  heroImageAlt:
+    'Ocean View, 2026 — a small seascape in paint on canvas, hung on a plaster wall in a Nairobi interior',
   // REPLACE: the circular brand mark. Save the file as
   // public/heartofart-logo.png and it appears in the header, the footer and
   // the browser tab. Square source with the medallion centred — the circle is
