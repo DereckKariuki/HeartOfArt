@@ -87,7 +87,7 @@ honoured — reveals resolve instantly and the hover zoom is disabled.
 Save the circular HeartOfArt mark as:
 
 ```
-public/images/brand/heartofart-logo.png
+public/heartofart-logo.png
 ```
 
 Export it **square**, with the medallion centred and at least 512×512 — do not
