@@ -4,14 +4,15 @@
  * `image`  — drop the real file at this exact path in /public and the
  *            placeholder disappears. Keep the descriptive filename:
  *            it is what image search reads.
- * `ratio`  — the piece's true aspect ratio, used by the lightbox.
- *            The grid crops every card to a shared 4:5 so the page
- *            reads as curated.
+ * `ratio`  — the aspect ratio of the supplied photograph, so containers
+ *            fit it exactly. The grid still crops every card to a shared
+ *            4:5 so the page reads as curated; the lightbox shows the
+ *            whole frame.
  * `status` — 'available' | 'sold' | 'print-only'
  * `price`  — whole KES. Omit for sold pieces.
  */
 
-export const COLLECTIONS = ['Afternoon Rooms', 'Market Mornings', 'Paper Weather']
+export const COLLECTIONS = ['Portraits', 'Landscapes', 'Afternoon Rooms', 'Market Mornings', 'Paper Weather']
 
 export const MEDIUMS = [
   'Charcoal and paint on canvas',
@@ -53,7 +54,6 @@ export const artworks = [
     status: 'sold',
     note: 'Painted from memory of a rented room I lived in for two years. The window frame is the one line I drew first and never corrected.',
     image: '/images/artwork/ngara-window-charcoal-and-paint-on-canvas.jpg',
-    featured: true,
   },
   {
     id: 'woman-carrying-morning',
@@ -67,7 +67,6 @@ export const artworks = [
     price: 150000,
     note: 'The largest piece in the series. She is not one person — she is composited from four mornings at Kariokor, sketched from the far side of the road.',
     image: '/images/artwork/woman-carrying-morning-charcoal-and-paint-on-canvas.jpg',
-    featured: true,
   },
   {
     id: 'kariokor-blue',
@@ -81,7 +80,6 @@ export const artworks = [
     price: 96000,
     note: 'One colour carried the whole piece — a blue tarpaulin that shaded half a row of stalls.',
     image: '/images/artwork/kariokor-blue-paint-on-canvas.jpg',
-    featured: true,
   },
   {
     id: 'the-quiet-after',
@@ -106,7 +104,6 @@ export const artworks = [
     status: 'print-only',
     note: 'The first of nine studies made during a long rainy season. The originals are held together as a set.',
     image: '/images/artwork/paper-weather-i-charcoal-on-paper.jpg',
-    featured: true,
   },
   {
     id: 'paper-weather-iv',
@@ -184,6 +181,78 @@ export const artworks = [
     price: 18000,
     note: 'One of five studies for the larger canvas. Small, and the one I nearly kept.',
     image: '/images/artwork/study-for-ocean-view-charcoal-on-paper.jpg',
+  },
+  // ── Photographed work. Everything above this line is still placeholder. ──
+  {
+    id: 'come-to-the-father',
+    title: 'Come to the Father',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: '30 × 40 cm',
+    ratio: '3/4',
+    status: 'available',
+    price: 35000, // REPLACE: placeholder price.
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/come-to-the-father-charcoal-on-paper.jpg',
+    featured: true,
+  },
+  {
+    id: 'ocean-view-sailboat',
+    title: 'Ocean View',
+    year: 2026,
+    collection: 'Landscapes',
+    medium: 'Paint on canvas',
+    // The photograph shows a portrait canvas, so this reads 20 wide by 30 tall.
+    dimensions: '20 × 30 cm',
+    ratio: '3/4',
+    status: 'available',
+    price: 30000, // REPLACE: placeholder price.
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/ocean-view-sailboat-paint-on-canvas.jpg',
+    featured: true,
+  },
+  {
+    id: 'sunset',
+    title: 'Sunset',
+    year: 2026,
+    collection: 'Landscapes',
+    medium: 'Paint on canvas',
+    dimensions: '30 × 20 cm',
+    ratio: '4/3',
+    status: 'available',
+    price: 30000, // REPLACE: placeholder price.
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/sunset-paint-on-canvas.jpg',
+    featured: true,
+  },
+  {
+    id: 'graduand-portrait',
+    title: 'Graduand Portrait',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: '30 × 40 cm',
+    ratio: '3/4',
+    status: 'available',
+    price: 35000, // REPLACE: placeholder price.
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/graduand-portrait-charcoal-on-paper.jpg',
+    featured: true,
+  },
+  {
+    id: 'couple',
+    title: 'Couple',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: '40 × 30 cm',
+    ratio: '4/3',
+    status: 'available',
+    price: 45000, // REPLACE: placeholder price.
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/couple-charcoal-on-paper.jpg',
+    featured: true,
   },
 ]
 

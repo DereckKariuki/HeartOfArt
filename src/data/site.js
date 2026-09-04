@@ -25,7 +25,7 @@ export const site = {
   // where a flat shot belongs in the portfolio grid. Landscape, 1600px wide or
   // more. The credit line in the corner is taken from the hero artwork in
   // artworks.js, so keep the two describing the same piece.
-  heroImage: '/images/artwork-in-situ/ocean-view-paint-on-canvas-in-situ.jpg',
+  heroImage: '/images/artwork/ocean-view-paint-on-canvas.jpg',
   heroImageAlt:
     'Ocean View, 2026 — a small seascape in paint on canvas, hung on a plaster wall in a Nairobi interior',
   // REPLACE: the circular brand mark. Save the file as

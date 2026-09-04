@@ -134,8 +134,16 @@ descriptive on purpose, and they are what image search reads.
 | 1 | Commission hero | `commissions.js` → `commissionHero` | 16:9, landscape, an installed past commission |
 | 4 | Commission progress | `commissions.js` → `progressGallery` | 4:5 |
 
-`Ocean View`'s in-situ photograph is supplied and doubles as the home hero,
-so that one is done. Every other path in the table is still a stand-in.
+Six pieces are photographed and in the repo — `Ocean View` (which doubles as
+the home hero), `Come to the Father`, `Ocean View` (sailboat), `Sunset`,
+`Graduand Portrait` and `Couple`. Those six are the home page's featured
+selection. Every other path in the table is still a stand-in, and the eleven
+placeholder pieces stay in the portfolio until you replace them.
+
+All six are in-situ photographs. The grid crops them to 4:5, which mostly
+trims wall on the portrait ones but does clip the edges of the landscape
+pieces; a flat, straight-on shot at the same path will always sit better in
+the grid, and the lightbox shows whatever you supply in full.
 
 The portfolio grid crops every piece to a shared 4:5 so the page reads as a
 hang; the lightbox uses each piece's true `ratio`, so set that per piece.

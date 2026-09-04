@@ -84,7 +84,7 @@ function Hero() {
 }
 
 function Featured() {
-  const pieces = featuredArtworks.slice(0, 5)
+  const pieces = featuredArtworks.slice(0, 6)
 
   return (
     <section className="mx-auto max-w-shell px-6 py-28 md:px-12 md:py-36 lg:px-16">
