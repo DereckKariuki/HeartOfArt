@@ -14,7 +14,7 @@ export const site = {
   wordmark: { first: 'Heart', middle: 'Of', last: 'Art' },
   tagline: 'Art is not art if it makes you feel nothing',
   heroLine:
-    'Layered acrylic and paper on canvas — quiet interiors, market mornings, and the people who move through them.',
+    'Charcoal on paper, paint on canvas, all this to capture emotions, feelings, and stories that connect with the Heart.',
   description:
     'HeartOfArt is the studio of Amani Wachira, a mixed-media painter in Nairobi. Original paintings, limited prints and commissioned work.',
   founded: 2016,
