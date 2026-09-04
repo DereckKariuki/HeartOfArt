@@ -96,11 +96,18 @@ square file keeps working if the shape ever changes, and the gold ring survives
 the mask.
 
 Once that file exists it appears in three places automatically: the header
-(40px beside the wordmark), the footer (72px), and the browser tab. Until then
-the mark renders nothing and the wordmark stands alone — no broken image.
+(40px on phones, 48px from `md` up), the footer (88px), and the browser tab.
 
-The wordmark stays alongside the logo on purpose: the lettering inside the
-medallion is unreadable at 40px, so the typographic mark carries the name.
+**The mark stands alone — there is no wordmark beside it.** The typographic
+wordmark now only ever renders as a fallback while the logo file is missing,
+so the header is never empty; add the file and the wordmark disappears from
+the site entirely.
+
+Header height is tuned to the mark: `Logo`'s `className` owns the rendered
+size and `size` only sets the width/height attributes, which reserve the
+square so the bar does not shift as the image decodes. If you change the
+header size, re-check it against `main`'s `pt-*` in `Layout.jsx` — that
+offset clears the fixed nav and there is only ~3px of slack.
 
 ### 2. Artwork and photography — 56 files
 

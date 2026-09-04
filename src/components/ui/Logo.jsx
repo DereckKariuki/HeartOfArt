@@ -2,20 +2,27 @@ import { useState } from 'react'
 import { site } from '../../data/site'
 
 /**
- * The circular brand mark.
+ * The circular brand mark, standing alone as the site's identity.
  *
  * The source artwork is a square with the medallion inscribed in it, so the
- * corners are masked away rather than cropped in an editor — swap the file and
- * the shape holds. Until that file exists the mark renders nothing at all and
- * the wordmark stands alone, so the header never shows a broken image.
+ * corners are masked away in CSS rather than cropped in an editor — the file
+ * can be re-exported without re-cropping and the gold ring survives.
  *
- * `alt` defaults to empty: every place this is used sits beside the wordmark or
- * inside an already-labelled link, so announcing the logo again would just
- * repeat the brand name to a screen reader.
+ * `className` owns the rendered size, so callers can size it per breakpoint.
+ * `size` only sets the width/height attributes, which reserve the square before
+ * the image decodes and stop the header shifting as it loads — it must not
+ * become an inline style, or it would beat the responsive classes.
+ *
+ * `fallback` covers the window before the real file is in /public: the mark
+ * cannot render, and a header with no brand in it at all is worse than a
+ * temporary wordmark. Once the file exists the fallback never renders again.
+ *
+ * `alt` stays empty because every use sits inside an already-labelled link —
+ * announcing the logo too would just repeat the studio name.
  */
-export default function Logo({ size = 40, className = '', alt = '' }) {
+export default function Logo({ size = 48, className = '', alt = '', fallback = null }) {
   const [failed, setFailed] = useState(false)
-  if (failed || !site.logo) return null
+  if (failed || !site.logo) return fallback
 
   return (
     <img
@@ -24,7 +31,6 @@ export default function Logo({ size = 40, className = '', alt = '' }) {
       width={size}
       height={size}
       onError={() => setFailed(true)}
-      style={{ width: size, height: size }}
       className={`shrink-0 rounded-full object-cover ${className}`}
     />
   )

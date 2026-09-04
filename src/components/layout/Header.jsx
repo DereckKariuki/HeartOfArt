@@ -51,14 +51,19 @@ export default function Header({ overHero = false }) {
         Skip to content
       </a>
 
-      <div className="mx-auto flex max-w-shell items-center justify-between px-6 py-5 md:px-12 lg:px-16">
+      <div className="mx-auto flex max-w-shell items-center justify-between px-6 py-4 md:px-12 lg:px-16">
         <Link
           to="/"
-          className={`flex items-center gap-3 ${tone} transition-colors duration-700 md:gap-4`}
+          className={`flex items-center ${tone} transition-colors duration-700`}
           aria-label="HeartOfArt — home"
         >
-          <Logo size={40} className="h-9 w-9 md:h-11 md:w-11" />
-          <Wordmark className="text-[1.4rem] md:text-[1.55rem]" tone={solid ? 'ink' : 'light'} />
+          <Logo
+            size={48}
+            className="h-10 w-10 md:h-12 md:w-12"
+            fallback={
+              <Wordmark className="text-[1.4rem] md:text-[1.55rem]" tone={solid ? 'ink' : 'light'} />
+            }
+          />
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">

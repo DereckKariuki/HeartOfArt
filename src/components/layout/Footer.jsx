@@ -17,10 +17,7 @@ export default function Footer() {
       <div className="mx-auto max-w-shell px-6 py-20 md:px-12 lg:px-16">
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-5">
-              <Logo size={72} />
-              <Wordmark className="text-[1.75rem]" />
-            </div>
+            <Logo size={88} className="h-[5.5rem] w-[5.5rem]" fallback={<Wordmark className="text-[1.75rem]" />} />
             <p className="mt-6 max-w-sm text-[1.0625rem] leading-relaxed text-muted">
               {site.tagline}
             </p>
