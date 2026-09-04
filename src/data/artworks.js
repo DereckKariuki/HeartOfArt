@@ -198,8 +198,8 @@ export const artworks = [
     featured: true,
   },
   {
-    id: 'ocean-view-sailboat',
-    title: 'Ocean View',
+    id: 'quiet-sail',
+    title: 'Quiet Sail',
     year: 2026,
     collection: 'Landscapes',
     medium: 'Paint on canvas',
@@ -209,7 +209,7 @@ export const artworks = [
     status: 'available',
     price: 30000, // REPLACE: placeholder price.
     note: 'REPLACE: a note in the artist’s voice about this piece.',
-    image: '/images/artwork/ocean-view-sailboat-paint-on-canvas.jpg',
+    image: '/images/artwork/quiet-sail-paint-on-canvas.jpg',
     featured: true,
   },
   {
