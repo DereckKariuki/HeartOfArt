@@ -19,6 +19,11 @@ export const site = {
     'HeartOfArt is the studio of Amani Wachira, a mixed-media painter in Nairobi. Original paintings, limited prints and commissioned work.',
   founded: 2016,
   city: 'Nairobi, Kenya',
+  // REPLACE: the circular brand mark. Drop the file at exactly this path and it
+  // appears in the header, the footer and the browser tab. Square source, the
+  // medallion centred in it — the circle is masked in CSS, so do not pre-crop.
+  // Export at 512×512 or larger with a transparent or black field.
+  logo: '/images/brand/heartofart-logo.png',
 }
 
 // REPLACE: artist name, portrait and first-person story.

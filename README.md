@@ -82,7 +82,27 @@ honoured — reveals resolve instantly and the hover zoom is disabled.
 
 ## What you need to supply
 
-### 1. Images — 56 files
+### 1. The logo — 1 file, needed first
+
+Save the circular HeartOfArt mark as:
+
+```
+public/images/brand/heartofart-logo.png
+```
+
+Export it **square**, with the medallion centred and at least 512×512 — do not
+pre-crop it to a circle. The page masks it round in CSS (`Logo.jsx`), so the
+square file keeps working if the shape ever changes, and the gold ring survives
+the mask.
+
+Once that file exists it appears in three places automatically: the header
+(40px beside the wordmark), the footer (72px), and the browser tab. Until then
+the mark renders nothing and the wordmark stands alone — no broken image.
+
+The wordmark stays alongside the logo on purpose: the lettering inside the
+medallion is unreadable at 40px, so the typographic mark carries the name.
+
+### 2. Artwork and photography — 56 files
 
 Drop a real file at the path listed in `src/data/*.js` and the stand-in
 disappears automatically; no code change. **Keep the filenames** — they are
@@ -105,7 +125,7 @@ hang; the lightbox uses each piece's true `ratio`, so set that per piece.
 If you have no progress photography yet, empty the `progressGallery` array and
 that whole section drops out of the commissions page cleanly.
 
-### 2. Copy and details
+### 3. Copy and details
 
 Everything below is currently placeholder and marked `REPLACE:` in the data files.
 
@@ -127,7 +147,7 @@ Everything below is currently placeholder and marked `REPLACE:` in the data file
 - **Delivery methods and fees** — `lib/checkout.js`.
 - **Exchange rate** — `KES_PER_USD` in `lib/format.js` is hard-coded at 129.
 
-### 3. Decisions I made that you may want to change
+### 4. Decisions I made that you may want to change
 
 - **Accent colour** is antique gold `#B8945F`, the first of your three options.
   Changing it means editing two values in `tailwind.config.js` — and picking a

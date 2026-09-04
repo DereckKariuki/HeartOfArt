@@ -5,6 +5,7 @@ import { nav } from '../../data/site'
 import { useCart } from '../../context/cart-store'
 import { useCurrency } from '../../context/currency-store'
 import { useScrolled } from '../../hooks/useScrolled'
+import Logo from '../ui/Logo'
 import Wordmark from '../ui/Wordmark'
 
 /**
@@ -51,7 +52,12 @@ export default function Header({ overHero = false }) {
       </a>
 
       <div className="mx-auto flex max-w-shell items-center justify-between px-6 py-5 md:px-12 lg:px-16">
-        <Link to="/" className={`${tone} transition-colors duration-700`} aria-label="HeartOfArt — home">
+        <Link
+          to="/"
+          className={`flex items-center gap-3 ${tone} transition-colors duration-700 md:gap-4`}
+          aria-label="HeartOfArt — home"
+        >
+          <Logo size={40} className="h-9 w-9 md:h-11 md:w-11" />
           <Wordmark className="text-[1.4rem] md:text-[1.55rem]" tone={solid ? 'ink' : 'light'} />
         </Link>
 

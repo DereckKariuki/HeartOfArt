@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Camera, Mail, MessageCircle, Phone } from 'lucide-react'
 import { contact, nav, site } from '../../data/site'
+import Logo from '../ui/Logo'
 import Wordmark from '../ui/Wordmark'
 
 const socials = [
@@ -16,7 +17,10 @@ export default function Footer() {
       <div className="mx-auto max-w-shell px-6 py-20 md:px-12 lg:px-16">
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Wordmark className="text-[1.75rem]" />
+            <div className="flex items-center gap-5">
+              <Logo size={72} />
+              <Wordmark className="text-[1.75rem]" />
+            </div>
             <p className="mt-6 max-w-sm text-[1.0625rem] leading-relaxed text-muted">
               {site.tagline}
             </p>
