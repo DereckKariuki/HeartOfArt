@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { artworks, COLLECTIONS, MEDIUMS, STATUSES } from '../data/artworks'
+import { artist } from '../data/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 import ArtworkCard from '../components/portfolio/ArtworkCard'
 import FilterBar from '../components/portfolio/FilterBar'
@@ -13,7 +14,7 @@ export default function Portfolio() {
   usePageMeta({
     title: 'Portfolio',
     description:
-      'Forty-odd paintings and works on paper by Amani Wachira, filterable by collection, medium and availability. Nairobi, Kenya.',
+      `Paintings and works on paper by ${artist.name}, filterable by collection, medium and availability. Nairobi, Kenya.`,
   })
 
   const [searchParams, setSearchParams] = useSearchParams()

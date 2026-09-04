@@ -16,7 +16,7 @@ export const site = {
   heroLine:
     'Charcoal on paper, paint on canvas, all this to capture emotions, feelings, and stories that connect with the Heart.',
   description:
-    'HeartOfArt is the studio of Amani Wachira, working in charcoal on paper and paint on canvas in Nairobi. Original work, limited prints and commissions.',
+    'HeartOfArt is the studio of Dereck Kariuki, working in charcoal on paper and paint on canvas in Nairobi. Original work, limited prints and commissions.',
   founded: 2016,
   city: 'Nairobi, Kenya',
   // REPLACE: the full-bleed image behind the top of the home page.
@@ -37,12 +37,11 @@ export const site = {
 
 // REPLACE: artist name, portrait and first-person story.
 export const artist = {
-  name: 'Amani Wachira',
+  name: 'Dereck Kariuki',
   role: 'Charcoal on paper, paint on canvas',
   location: 'Nairobi, Kenya',
-  portrait: '/images/artist/amani-wachira-portrait-studio-nairobi.jpg',
-  portraitAlt:
-    'Amani Wachira in the Nairobi studio, standing beside an unfinished canvas',
+  portrait: '/images/artist/dereck-kariuki-portrait-nairobi.jpg',
+  portraitAlt: 'Dereck Kariuki, photographed outdoors in Nairobi',
   shortBio:
     'I have worked from the same third-floor room in Nairobi for nine years. Every piece starts in charcoal and most of them end in paint — the drawing underneath is what holds the feeling, and the colour is what lets anyone else see it.',
   story: [
@@ -104,23 +103,20 @@ export const nav = [
   { to: '/contact', label: 'Contact' },
 ]
 
-// REPLACE: exhibitions, press and collections — year and title only.
-export const exhibitions = [
-  { year: '2025', title: 'Afternoon Rooms', detail: 'Solo exhibition, Circle Art Gallery, Nairobi' },
-  { year: '2024', title: 'Paper Weather', detail: 'Two-person show with Nia Mutiso, The Attic, Nairobi' },
-  { year: '2024', title: 'East African Contemporary', detail: 'Group show, Kampala Art Biennale' },
-  { year: '2022', title: 'Ngara Notes', detail: 'Solo exhibition, Alliance Française, Nairobi' },
-  { year: '2019', title: 'First Light', detail: 'Group show, Kuona Trust, Nairobi' },
-]
+// REPLACE: your real exhibitions, press and collections.
+//
+// These lists ship empty on purpose. They previously held invented entries
+// naming real galleries, publications and museums, which was harmless while
+// the artist was fictional — attached to a real name and face they would be
+// false claims about real institutions, and the kind a collector checks.
+// Each list hides its own column until it has entries, and the whole Record
+// section disappears while all three are empty.
+//
+// Shape: { year: '2025', title: 'Show title', detail: 'Solo show, venue, city' }
+export const exhibitions = []
 
-export const press = [
-  { year: '2025', title: 'The quiet maximalism of Amani Wachira', detail: 'Nation Weekend' },
-  { year: '2024', title: 'Twelve East African artists to watch', detail: 'Contemporary And (C&)' },
-  { year: '2023', title: 'Studio visit: Riverside Drive', detail: 'Design Kenya' },
-]
+// Shape: { year: '2025', title: 'Article headline', detail: 'Publication' }
+export const press = []
 
-export const collections = [
-  { year: '—', title: 'Nairobi National Museum', detail: 'Permanent collection' },
-  { year: '—', title: 'Sarova Group', detail: 'Corporate collection, Nairobi' },
-  { year: '—', title: 'Private collections', detail: 'Kenya, Uganda, United Kingdom, United States' },
-]
+// Shape: { year: '—', title: 'Collection name', detail: 'Permanent collection' }
+export const collections = []

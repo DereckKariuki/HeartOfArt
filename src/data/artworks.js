@@ -1,3 +1,5 @@
+import { artist } from './site'
+
 /**
  * REPLACE: the portfolio. One entry per piece.
  *
@@ -260,7 +262,7 @@ export const getArtwork = (id) => artworks.find((piece) => piece.id === id)
 
 /** Alt text is derived so no piece can ship without it: title, medium, artist. */
 export const artworkAlt = (piece) =>
-  `${piece.title}, ${piece.year} — ${piece.medium}, ${piece.dimensions}, by Amani Wachira`
+  `${piece.title}, ${piece.year} — ${piece.medium}, ${piece.dimensions}, by ${artist.name}`
 
 export const featuredArtworks = artworks.filter((piece) => piece.featured)
 

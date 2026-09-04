@@ -5,6 +5,7 @@ import {
   commissionTiers,
   progressGallery,
 } from '../data/commissions'
+import { artist } from '../data/site'
 import { useCurrency } from '../context/currency-store'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { useImageSrc } from '../hooks/useImageSrc'
@@ -208,7 +209,7 @@ export default function Commissions() {
   usePageMeta({
     title: 'Commissions',
     description:
-      'Commission an original charcoal or painted work from Amani Wachira in Nairobi. Three size tiers from KES 45,000, four to sixteen weeks, framing and delivery included.',
+      `Commission an original charcoal or painted work from ${artist.name} in Nairobi. Three size tiers from KES 45,000, four to sixteen weeks, framing and delivery included.`,
   })
 
   return (

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { originals, prints, priceFloor } from '../data/products'
+import { artist } from '../data/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 import ProductCard from '../components/shop/ProductCard'
 import Reveal from '../components/ui/Reveal'
@@ -12,7 +13,7 @@ const TABS = [
 export default function Shop() {
   usePageMeta({
     title: 'Shop — originals and limited prints',
-    description: `Original charcoal and paint works and signed limited-edition giclée prints by Amani Wachira, from KES ${priceFloor.toLocaleString('en-KE')}. Delivered in Nairobi, countrywide and internationally.`,
+    description: `Original charcoal and paint works and signed limited-edition giclée prints by ${artist.name}, from KES ${priceFloor.toLocaleString('en-KE')}. Delivered in Nairobi, countrywide and internationally.`,
   })
 
   const [active, setActive] = useState('originals')

@@ -21,7 +21,11 @@ function Portrait() {
         onError={image.onError}
         alt={artist.portraitAlt}
         fetchPriority="high"
-        className="h-[52vh] w-full object-cover md:h-[68vh]"
+        // A standing portrait in a wide band: centred, `object-cover` crops to
+        // the torso and loses the face entirely. Anchoring the crop near the
+        // top keeps the head in frame on wide screens. On narrow ones the band
+        // is taller than it is wide, the whole figure fits, and this is inert.
+        className="h-[52vh] w-full object-cover object-[50%_10%] md:h-[68vh]"
       />
       <div className="mx-auto max-w-shell px-6 md:px-12 lg:px-16">
         <div className="-mt-16 max-w-3xl bg-canvas pr-0 pt-10 md:-mt-24 md:pr-16 md:pt-14">
@@ -96,6 +100,9 @@ function Process() {
 }
 
 function RecordList({ heading, items }) {
+  // A heading over an empty rule reads as something failing to load.
+  if (items.length === 0) return null
+
   return (
     <div>
       <h3 className="label mb-8">{heading}</h3>
@@ -119,6 +126,9 @@ function RecordList({ heading, items }) {
 }
 
 function Record() {
+  // Nothing to show yet: the section returns the moment there is a real entry.
+  if (exhibitions.length + press.length + collections.length === 0) return null
+
   return (
     <section className="mx-auto max-w-shell px-6 py-28 md:px-12 md:py-36 lg:px-16">
       <SectionHeading eyebrow="Record" title="Exhibitions, press and collections" />

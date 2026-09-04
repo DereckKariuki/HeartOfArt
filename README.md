@@ -129,7 +129,7 @@ descriptive on purpose, and they are what image search reads.
 | 11 | Each original in a room | `products.js` (derived) | 4:3, shows scale |
 | 12 | Prints — flat, framed, in a room (4 editions × 3) | `products.js` → `prints[].images` | flat = the print's ratio; other two 4:3 |
 | 1 | Home hero background | `site.js` → `heroImage` | landscape, 1600px+ — an in-situ shot reads best at full bleed |
-| 1 | Artist portrait | `site.js` → `artist.portrait` | ≥3000px wide — used both at 4:5 and full-bleed 16:9 |
+| 1 | Artist portrait | `site.js` → `artist.portrait` | supplied — the About banner anchors its crop near the top so a standing shot keeps its head |
 | 4 | Studio process details | `site.js` → `artist.process` | 1:1 |
 | 1 | Commission hero | `commissions.js` → `commissionHero` | 16:9, landscape, an installed past commission |
 | 4 | Commission progress | `commissions.js` → `progressGallery` | 4:5 |
@@ -155,8 +155,14 @@ that whole section drops out of the commissions page cleanly.
 
 Everything below is currently placeholder and marked `REPLACE:` in the data files.
 
-- **Artist name.** Currently *Amani Wachira*, in `site.js`. It also appears in
-  the alt-text builder in `artworks.js` — change both.
+- **The artist's story.** `site.js` → `artist.story` and `artist.shortBio` are
+  still invented first-person biography — an architecture training, a rented
+  room in Ngara — now sitting under a real name and face. Rewrite them before
+  this goes anywhere near a visitor.
+- **Exhibitions, press and collections** ship empty. They held invented entries
+  naming real galleries and museums, which under a real name would be false
+  claims a collector could check. Add real ones and the Record section
+  reappears on its own.
 - **Tagline and hero line** — `site.js`.
 - **The story** — three first-person paragraphs in `site.js` → `artist.story`.
 - **Process descriptions** — four short entries.
