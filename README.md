@@ -131,7 +131,7 @@ descriptive on purpose, and they are what image search reads.
 | 1 | Home hero background | `site.js` → `heroImage` | landscape, 1600px+ — an in-situ shot reads best at full bleed |
 | 1 | Artist portrait | `site.js` → `artist.portrait` | supplied — the About banner anchors its crop near the top so a standing shot keeps its head |
 | 4 | Studio process details | `site.js` → `artist.process` | 1:1 |
-| 1 | Commission hero | `commissions.js` → `commissionHero` | 16:9, landscape, an installed past commission |
+| 1 | Commission hero | `commissions.js` → `commissionHero` | supplied — also feeds the home page teaser |
 | 4 | Commission progress | `commissions.js` → `progressGallery` | 4:5 |
 
 Six pieces are photographed and in the repo — `Ocean View` (which doubles as

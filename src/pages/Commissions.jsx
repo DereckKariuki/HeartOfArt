@@ -139,7 +139,7 @@ function ProgressGallery() {
       <SectionHeading
         eyebrow="In progress"
         title="A commission, week by week"
-        standfirst="From the underpainting to the wall it was made for. Nine weeks, two panels."
+        standfirst="From the first marks to the wall it was made for."
       />
       <ul className="mt-20 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
         {progressGallery.map((shot, index) => (

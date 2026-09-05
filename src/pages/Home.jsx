@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { artist, site } from '../data/site'
 import { artworkAlt, featuredArtworks, heroArtwork } from '../data/artworks'
 import { priceFloor } from '../data/products'
-import { commissionEntry } from '../data/commissions'
+import { commissionEntry, commissionHero } from '../data/commissions'
 import { useCurrency } from '../context/currency-store'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { useImageSrc } from '../hooks/useImageSrc'
@@ -196,11 +196,11 @@ function CommissionsTeaser() {
 
         <Reveal delay={140} className="md:col-span-5 md:col-start-8">
           <ArtImage
-            src="/images/commission/commissioned-diptych-for-private-residence-nairobi.jpg"
-            alt="A commissioned two-panel painting hung above a stone fireplace in a Nairobi home"
+            src={commissionHero.image}
+            alt={commissionHero.alt}
             ratio="4/5"
             seed="commission-teaser"
-            label="Commissioned diptych"
+            label={commissionHero.label}
             className="shadow-piece"
           />
         </Reveal>

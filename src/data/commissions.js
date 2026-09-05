@@ -1,9 +1,14 @@
 /** REPLACE: commission process copy, tiers and terms. */
 
+// Shown at the top of the commissions page and again in the home page teaser,
+// which reads it from here rather than repeating the path and the alt text.
 export const commissionHero = {
-  image: '/images/commission/commissioned-diptych-for-private-residence-nairobi.jpg',
-  alt: 'A commissioned two-panel painting hung above a stone fireplace in a Nairobi home',
-  caption: 'Two panels, 180 × 120 cm each. Private residence, Karen, 2025.',
+  image: '/images/commission/commissioned-portrait-charcoal-on-paper.jpg',
+  alt: 'A commissioned portrait in charcoal, framed and hung, lettered “Some people are captured in photographs — you were worth turning into art”',
+  // REPLACE: add the real size, year and where it hangs when you have them.
+  caption: 'Commissioned portrait, charcoal on paper, framed.',
+  // Used as the stand-in caption while the photograph is missing.
+  label: 'Commissioned art',
 }
 
 // REPLACE: the entry price and lead time quoted on the home page.
@@ -92,24 +97,24 @@ export const commissionTiers = [
 // Leave `progressGallery` empty and the section drops out of the page.
 export const progressGallery = [
   {
-    src: '/images/commission-progress/karen-diptych-01-underpainting.jpg',
-    alt: 'Commission in progress: the warm underpainting stage of a two-panel work',
-    caption: 'Week 1 — underpainting',
+    src: '/images/commission-progress/commission-01-first-marks.jpg',
+    alt: 'Commission in progress: the first marks going down',
+    caption: 'First marks',
   },
   {
-    src: '/images/commission-progress/karen-diptych-02-first-paint-layer.jpg',
-    alt: 'Commission in progress: the first layer of paint going over the charcoal drawing',
-    caption: 'Week 4 — first paint layer',
+    src: '/images/commission-progress/commission-02-building-up.jpg',
+    alt: 'Commission in progress: the work building up in layers',
+    caption: 'Building up',
   },
   {
-    src: '/images/commission-progress/karen-diptych-03-charcoal-over-paint.jpg',
-    alt: 'Commission in progress: charcoal worked back over the painted surface',
-    caption: 'Week 7 — charcoal over paint',
+    src: '/images/commission-progress/commission-03-working-back.jpg',
+    alt: 'Commission in progress: the surface worked back by hand',
+    caption: 'Working back',
   },
   {
-    src: '/images/commission-progress/karen-diptych-04-installed.jpg',
-    alt: 'The finished commissioned diptych installed above a fireplace',
-    caption: 'Week 9 — installed',
+    src: '/images/commission-progress/commission-04-installed.jpg',
+    alt: 'The finished commissioned piece framed and installed on the wall it was made for',
+    caption: 'Installed',
   },
 ]
 
