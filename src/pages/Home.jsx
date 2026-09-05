@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { artist, site } from '../data/site'
 import { artworkAlt, featuredArtworks, heroArtwork } from '../data/artworks'
 import { priceFloor } from '../data/products'
-import { commissionTiers } from '../data/commissions'
+import { commissionEntry } from '../data/commissions'
 import { useCurrency } from '../context/currency-store'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { useImageSrc } from '../hooks/useImageSrc'
@@ -171,7 +171,6 @@ function AboutBand() {
 
 function CommissionsTeaser() {
   const { from } = useCurrency()
-  const lowest = Math.min(...commissionTiers.map((tier) => tier.from))
 
   return (
     <section className="mx-auto max-w-shell px-6 py-28 md:px-12 md:py-36 lg:px-16">
@@ -183,8 +182,8 @@ function CommissionsTeaser() {
           </h2>
           <p className="mt-7 max-w-prose text-[1.0625rem] leading-[1.8] text-muted">
             Four commissions are taken at a time. It starts with a conversation about
-            the room and ends with the work hung — {from(lowest)}, four to sixteen
-            weeks depending on scale.
+            the room and ends with the work hung — {from(commissionEntry.from)},{' '}
+            {commissionEntry.lead} depending on scale.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-6">
             <Button to="/commissions">Start an enquiry</Button>

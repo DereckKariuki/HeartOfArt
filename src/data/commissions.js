@@ -6,6 +6,19 @@ export const commissionHero = {
   caption: 'Two panels, 180 × 120 cm each. Private residence, Karen, 2025.',
 }
 
+// REPLACE: the entry price and lead time quoted on the home page.
+//
+// The home page used to derive this from the cheapest tier below, so the two
+// could not disagree. They are stated here instead because they no longer
+// match — the tiers are still placeholder figures. Whatever the real tiers
+// turn out to be, these two values have to agree with them: a visitor who
+// clicks through from "from KES 3,500" and lands on a page starting at
+// KES 45,000 has been misled, however unintentionally.
+export const commissionEntry = {
+  from: 3500,
+  lead: 'one to four weeks',
+}
+
 export const commissionSteps = [
   {
     n: '01',
