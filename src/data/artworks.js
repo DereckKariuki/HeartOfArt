@@ -41,21 +41,21 @@ export const artworks = [
     medium: 'Charcoal on paper',
     dimensions: null, // REPLACE
     ratio: '3/4',
-    status: 'available',
-    price: null, // REPLACE: shows "Price on request" until this is a number.
+    status: 'sold',
+    price: null,
     note: 'REPLACE: a note in the artist’s voice about this piece.',
     image: '/images/artwork/newborn-charcoal-on-paper.jpg',
   },
   {
     id: 'portrait-with-glasses',
-    title: 'Portrait with Glasses',
+    title: 'Portrait',
     year: 2026,
     collection: 'Portraits',
     medium: 'Charcoal on paper',
     dimensions: null, // REPLACE
     ratio: '3/4',
-    status: 'available',
-    price: null, // REPLACE
+    status: 'sold',
+    price: null,
     note: 'REPLACE: a note in the artist’s voice about this piece.',
     image: '/images/artwork/portrait-with-glasses-charcoal-on-paper.jpg',
   },
@@ -68,33 +68,33 @@ export const artworks = [
     dimensions: null, // REPLACE
     ratio: '3/4',
     status: 'available',
-    price: null, // REPLACE
+    price: 5000,
     note: 'REPLACE: a note in the artist’s voice about this piece.',
     image: '/images/artwork/caged-charcoal-on-paper.jpg',
   },
   {
     id: 'horse',
     title: 'Horse',
-    year: 2026,
+    year: 2025,
     collection: 'Studies',
     medium: 'Coloured pencil on paper',
     dimensions: null, // REPLACE
     ratio: '4/3',
     status: 'available',
-    price: null, // REPLACE
+    price: 3500,
     note: 'REPLACE: a note in the artist’s voice about this piece.',
     image: '/images/artwork/horse-coloured-pencil-on-paper.jpg',
   },
   {
     id: 'portrait-of-a-man',
-    title: 'Portrait of a Man',
+    title: 'Portrait',
     year: 2026,
     collection: 'Portraits',
     medium: 'Charcoal on paper',
     dimensions: null, // REPLACE
     ratio: '3/4',
-    status: 'available',
-    price: null, // REPLACE
+    status: 'sold',
+    price: null,
     note: 'REPLACE: a note in the artist’s voice about this piece.',
     image: '/images/artwork/portrait-of-a-man-charcoal-on-paper.jpg',
   },
@@ -108,7 +108,7 @@ export const artworks = [
     dimensions: '30 × 40 cm',
     ratio: '3/4',
     status: 'available',
-    price: 35000, // REPLACE: placeholder price.
+    price: 5500,
     note: 'REPLACE: a note in the artist’s voice about this piece.',
     image: '/images/artwork/come-to-the-father-charcoal-on-paper.jpg',
     featured: true,
