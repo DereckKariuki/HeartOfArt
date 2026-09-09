@@ -96,7 +96,7 @@ export const contact = {
   instagram: '@heartofart.ke',
   instagramHref: 'https://instagram.com/heartofart.ke',
   studio: {
-    lines: ['HeartOfArt', 'Digital Studio', 'Nairobi, Kenya'],
+    lines: ['HeartOfArt', 'Digital Studio'],
     // REPLACE: how you actually want people to arrange a piece. The old line
     // offered in-person viewings on set days, which a digital studio cannot
     // honour — and an address a visitor cannot turn up to is worse than none.
