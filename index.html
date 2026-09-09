@@ -13,7 +13,10 @@
     <link rel="apple-touch-icon" href="/heartofart-logo.png" />
     <!-- Fallback while the real mark is not yet in /public. -->
     <link rel="icon" type="image/svg+xml" href="/heartofart-mark.svg" />
-    <link rel="canonical" href="https://heartofart.co.ke/" />
+    <!-- No canonical is hardcoded: the app sets a self-referential one per
+         route from the real origin. Asserting a domain here that the site
+         is not served from tells search engines the authoritative copy is
+         somewhere else. Add one only once the real domain is settled. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="HeartOfArt" />
     <meta property="og:title" content="HeartOfArt — Contemporary paintings from Nairobi" />

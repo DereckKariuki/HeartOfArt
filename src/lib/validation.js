@@ -16,7 +16,7 @@ export const email = (value) => {
 export const phone = (value) => {
   const v = String(value ?? '').trim()
   if (!v) return 'Phone number is required.'
-  return PHONE.test(v) ? '' : 'Enter a valid phone number, e.g. +254 700 000 000.'
+  return PHONE.test(v) ? '' : 'Enter a valid phone number, e.g. 0712 345 678 or +254 712 345 678.'
 }
 
 export const minLength = (label, n) => (value) => {

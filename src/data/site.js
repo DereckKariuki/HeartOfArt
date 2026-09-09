@@ -84,16 +84,23 @@ export const artist = {
 
 // REPLACE: your real contact details and handles.
 export const contact = {
-  email: 'studio@heartofart.co.ke',
-  phone: '+254 700 000 000',
-  phoneHref: 'tel:+254700000000',
-  whatsapp: '+254 700 000 000',
-  whatsappHref: 'https://wa.me/254700000000',
+  email: 'heartofart83@gmail.com',
+  // Shown in local form; the links carry the international form, because
+  // tel: and wa.me both need a country code to work from outside Kenya, and
+  // wa.me additionally refuses the leading zero.
+  phone: '0110 025 232',
+  phoneHref: 'tel:+254110025232',
+  whatsapp: '0110 025 232',
+  whatsappHref: 'https://wa.me/254110025232',
+  // REPLACE: still a placeholder handle — nothing links here yet.
   instagram: '@heartofart.ke',
   instagramHref: 'https://instagram.com/heartofart.ke',
   studio: {
-    lines: ['HeartOfArt Studio', '3rd Floor, Riverside Court', 'Riverside Drive, Nairobi'],
-    note: 'Viewings by appointment only, Tuesday to Saturday, 10:00 – 17:00.',
+    lines: ['HeartOfArt', 'Digital Studio', 'Nairobi, Kenya'],
+    // REPLACE: how you actually want people to arrange a piece. The old line
+    // offered in-person viewings on set days, which a digital studio cannot
+    // honour — and an address a visitor cannot turn up to is worse than none.
+    note: 'Everything is arranged online. Send an enquiry and you will get photographs, options and a delivery plan by reply.',
   },
   responseTime: 'Enquiries are answered within two working days.',
 }

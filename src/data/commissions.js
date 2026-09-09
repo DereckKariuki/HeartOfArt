@@ -85,7 +85,7 @@ export const commissionTiers = [
     lead: '10 – 16 weeks',
     includes: [
       'Linen on a braced hardwood stretcher',
-      'A studio visit and an on-site colour reading',
+      'A call to read the room, its light and its colours, before anything is drawn',
       'Three composition sketches, unlimited revisions to sketch stage',
       'Frame of your choosing, or float-mounted',
       'Crating, countrywide delivery and hanging included',

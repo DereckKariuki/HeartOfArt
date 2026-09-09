@@ -16,7 +16,7 @@ export default function Contact() {
   usePageMeta({
     title: 'Contact',
     description:
-      'Enquire about a painting, a print or a commission. HeartOfArt studio, Riverside Drive, Nairobi. Viewings by appointment.',
+      'Enquire about a piece, a print or a commission. HeartOfArt is a digital studio in Nairobi, Kenya — everything is arranged online.',
   })
 
   const [searchParams] = useSearchParams()
@@ -32,7 +32,7 @@ export default function Contact() {
         <p className="mt-8 max-w-prose text-[1.0625rem] leading-[1.8] text-muted">
           {piece
             ? 'The details are filled in below — add anything you would like to know about the piece, its condition or delivery.'
-            : 'About a piece, a print, a commission, or a visit to the studio. Whichever it is, this reaches the studio directly.'}
+            : 'About a piece, a print, or a commission. Whichever it is, this reaches the studio directly.'}
         </p>
       </Reveal>
 
