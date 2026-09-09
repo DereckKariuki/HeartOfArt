@@ -1,5 +1,7 @@
+import { useCallback, useRef } from 'react'
 import {
   commissionHero,
+  commissionMediums,
   commissionSteps,
   commissionTerms,
   commissionTiers,
@@ -82,43 +84,47 @@ function Process() {
   )
 }
 
-function Tiers() {
-  const { from } = useCurrency()
+// "paint on canvas, charcoal on paper or coloured pencil on paper" — read
+// mid-sentence, so the first word is lowercased and the last takes an "or".
+function listMediums(mediums) {
+  const lower = mediums.map((m) => m.charAt(0).toLowerCase() + m.slice(1))
+  if (lower.length < 2) return lower.join('')
+  return `${lower.slice(0, -1).join(', ')} or ${lower[lower.length - 1]}`
+}
+
+function Tiers({ onEnquire }) {
+  const { range } = useCurrency()
 
   return (
     <section className="border-y border-taupe/50 bg-bone/40">
       <div className="mx-auto max-w-shell px-6 py-28 md:px-12 md:py-36 lg:px-16">
         <SectionHeading
           eyebrow="Pricing"
-          title="Three sizes, and what each includes"
-          standfirst="Figures are starting points. The quote you receive is fixed and itemised."
+          title="Six sizes, A5 up to A0"
+          standfirst={`Every size is made in ${listMediums(commissionMediums)}. Where a piece lands inside its range depends on the medium, the subject and how much is in the frame — the quote you receive is fixed and itemised.`}
         />
 
-        <div className="mt-20 grid gap-8 lg:grid-cols-3">
+        <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {commissionTiers.map((tier, index) => (
             <Reveal
               key={tier.id}
-              delay={index * 120}
-              className={`flex flex-col border bg-canvas px-8 py-10 ${
-                tier.highlight ? 'border-accent shadow-piece' : 'border-taupe/60'
-              }`}
+              delay={index * 90}
+              className="border border-taupe/60 bg-canvas px-8 py-10"
             >
               <h3 className="font-serif text-[1.9rem] font-light text-ink">{tier.name}</h3>
-              <p className="mt-3 text-base leading-snug text-muted">{tier.sizes}</p>
+              <p className="mt-3 text-base leading-snug text-muted">{tier.dimensions}</p>
               <p className="mt-8 font-serif text-[2.1rem] font-light tabular-nums text-ink">
-                {from(tier.from)}
+                {range(tier.from, tier.to)}
               </p>
               <p className="label mt-3">{tier.lead}</p>
-              <hr className="hairline my-8" />
-              <ul className="flex-1 space-y-3">
-                {tier.includes.map((line) => (
-                  <li key={line} className="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
-                    <span aria-hidden="true" className="mt-2.5 h-px w-3 shrink-0 bg-accent" />
-                    {line}
-                  </li>
-                ))}
-              </ul>
-              <Button href="#enquiry" variant="outline" size="small" className="mt-10">
+              <hr className="hairline mt-8" />
+              <Button
+                href="#enquiry"
+                variant="outline"
+                size="small"
+                className="mt-8"
+                onClick={() => onEnquire(tier.name)}
+              >
                 Enquire about {tier.name}
               </Button>
             </Reveal>
@@ -180,7 +186,7 @@ function Terms() {
   )
 }
 
-function Enquiry() {
+function Enquiry({ formRef }) {
   return (
     <section id="enquiry" className="scroll-mt-28 border-t border-taupe/50 bg-bone/40">
       <div className="mx-auto max-w-shell px-6 py-28 md:px-12 md:py-36 lg:px-16">
@@ -192,12 +198,12 @@ function Enquiry() {
             </h2>
             <p className="mt-7 max-w-prose text-[1.0625rem] leading-[1.8] text-muted">
               The more you can say about where the piece will live, the better the first
-              quote will be. If you are not sure of the size, describe the wall and I
-              will work it out.
+              quote will be. If you are not sure which size fits, say so and describe the
+              wall — I will work it out.
             </p>
           </Reveal>
           <div className="lg:col-span-7 lg:col-start-6">
-            <CommissionForm />
+            <CommissionForm ref={formRef} />
           </div>
         </div>
       </div>
@@ -209,17 +215,22 @@ export default function Commissions() {
   usePageMeta({
     title: 'Commissions',
     description:
-      `Commission an original charcoal or painted work from ${artist.name}. Three size tiers from KES 45,000, four to sixteen weeks, framing and delivery included.`,
+      `Commission an original charcoal, paint or coloured pencil work from ${artist.name}. Six sizes from A5 to A0, KES 1,000 to KES 25,000, one to seven weeks.`,
   })
+
+  // The pricing buttons name a size; this hands that size to the form they
+  // scroll to, so the visitor does not have to pick it a second time.
+  const formRef = useRef(null)
+  const selectSize = useCallback((size) => formRef.current?.setSize(size), [])
 
   return (
     <>
       <Hero />
       <Process />
-      <Tiers />
+      <Tiers onEnquire={selectSize} />
       <ProgressGallery />
       <Terms />
-      <Enquiry />
+      <Enquiry formRef={formRef} />
     </>
   )
 }

@@ -31,3 +31,13 @@ export function formatPrice(amountKes, currency = 'KES') {
 export function formatFrom(amountKes, currency = 'KES') {
   return `from ${formatPrice(amountKes, currency)}`
 }
+
+/** "KES 1,000 – 3,500" / "$8 – 27" — the unit is stated once, not twice. */
+export function formatRange(lowKes, highKes, currency = 'KES') {
+  const low = formatPrice(lowKes, currency)
+  if (highKes == null || highKes === lowKes) return low
+  const high = formatPrice(highKes, currency)
+  // Strip the repeated unit off the upper figure: "KES 1,000" -> "1,000".
+  const bare = high.replace(/^KES\s|^\$/, '')
+  return `${low} – ${bare}`
+}

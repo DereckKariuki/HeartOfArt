@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { formatPrice, formatFrom } from '../lib/format'
+import { formatPrice, formatFrom, formatRange } from '../lib/format'
 import { CurrencyContext } from './currency-store'
 
 /**
@@ -20,6 +20,7 @@ export function CurrencyProvider({ children }) {
       toggle,
       price: (amount) => formatPrice(amount, currency),
       from: (amount) => formatFrom(amount, currency),
+      range: (low, high) => formatRange(low, high, currency),
     }),
     [currency, toggle],
   )

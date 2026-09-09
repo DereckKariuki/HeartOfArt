@@ -11,17 +11,41 @@ export const commissionHero = {
   label: 'Commissioned art',
 }
 
-// REPLACE: the entry price and lead time quoted on the home page.
-//
-// The home page used to derive this from the cheapest tier below, so the two
-// could not disagree. They are stated here instead because they no longer
-// match — the tiers are still placeholder figures. Whatever the real tiers
-// turn out to be, these two values have to agree with them: a visitor who
-// clicks through from "from KES 3,500" and lands on a page starting at
-// KES 45,000 has been misled, however unintentionally.
+// Every commission is offered in the same three mediums, whatever the size.
+export const commissionMediums = [
+  'Paint on canvas',
+  'Charcoal on paper',
+  'Coloured pencil on paper',
+]
+
+// Six paper sizes, A5 up to A0. `from`/`to` bracket the quote for that size:
+// where a piece lands inside its range depends on the medium, the subject and
+// how much is in the frame.
+export const commissionTiers = [
+  { id: 'a5', name: 'A5', dimensions: '14.8 × 21.0 cm', from: 1000, to: 3500, lead: '1 – 2 weeks' },
+  { id: 'a4', name: 'A4', dimensions: '21.0 × 29.7 cm', from: 3500, to: 5000, lead: '1 – 2 weeks' },
+  { id: 'a3', name: 'A3', dimensions: '29.7 × 42.0 cm', from: 5000, to: 7000, lead: '2 – 3 weeks' },
+  { id: 'a2', name: 'A2', dimensions: '42.0 × 59.4 cm', from: 7000, to: 10000, lead: '2 – 4 weeks' },
+  { id: 'a1', name: 'A1', dimensions: '59.4 × 84.1 cm', from: 10000, to: 15000, lead: '3 – 5 weeks' },
+  { id: 'a0', name: 'A0', dimensions: '84.1 × 118.9 cm', from: 15000, to: 25000, lead: '4 – 7 weeks' },
+]
+
+// The enquiry form's size dropdown. Values are the plain size codes so the
+// "Enquire about A3" buttons can preselect one by name.
+export const commissionSizeOptions = [
+  ...commissionTiers.map((tier) => ({
+    value: tier.name,
+    label: `${tier.name} — ${tier.dimensions}`,
+  })),
+  { value: 'Not sure yet', label: 'Not sure yet' },
+]
+
+// The home page teaser quotes an entry price and a lead time. Both are read
+// off the tiers rather than written out again, so the two pages cannot drift
+// apart the way they did when the figures were kept in two places.
 export const commissionEntry = {
-  from: 3500,
-  lead: 'one to four weeks',
+  from: Math.min(...commissionTiers.map((tier) => tier.from)),
+  lead: 'one to seven weeks',
 }
 
 export const commissionSteps = [
@@ -44,52 +68,6 @@ export const commissionSteps = [
     n: '04',
     title: 'Delivery',
     body: 'The balance falls due on completion. Framed work is crated, and hung by the studio where that is possible; elsewhere it goes by insured courier.',
-  },
-]
-
-export const commissionTiers = [
-  {
-    id: 'intimate',
-    name: 'Intimate',
-    sizes: 'Up to 60 × 60 cm',
-    from: 45000,
-    lead: '4 – 6 weeks',
-    includes: [
-      'Cotton canvas on a pine stretcher',
-      'One composition sketch',
-      'One round of revisions before the final layer',
-      'Unframed, ready to hang',
-      'Local delivery included',
-    ],
-  },
-  {
-    id: 'room',
-    name: 'Room',
-    sizes: 'Up to 120 × 90 cm',
-    from: 95000,
-    lead: '6 – 10 weeks',
-    includes: [
-      'Heavy cotton canvas on a hardwood stretcher',
-      'Two composition sketches',
-      'Two rounds of revisions',
-      'Natural oak or blackened ash float frame',
-      'Local delivery and hanging included',
-    ],
-    highlight: true,
-  },
-  {
-    id: 'wall',
-    name: 'Wall',
-    sizes: 'Over 120 × 90 cm, including diptychs and triptychs',
-    from: 180000,
-    lead: '10 – 16 weeks',
-    includes: [
-      'Linen on a braced hardwood stretcher',
-      'A call to read the room, its light and its colours, before anything is drawn',
-      'Three composition sketches, unlimited revisions to sketch stage',
-      'Frame of your choosing, or float-mounted',
-      'Crating, countrywide delivery and hanging included',
-    ],
   },
 ]
 
@@ -119,17 +97,18 @@ export const progressGallery = [
 ]
 
 export const commissionTerms = [
-  { term: 'Turnaround', detail: 'Four to sixteen weeks from deposit, depending on size. I take four commissions at a time and will tell you honestly where the queue stands.' },
+  { term: 'Turnaround', detail: 'One to seven weeks from deposit, depending on size. I take four commissions at a time and will tell you honestly where the queue stands.' },
   { term: 'Deposit', detail: '50% on acceptance of the quote, non-refundable once materials are cut. The balance is due before delivery.' },
   { term: 'Revisions', detail: 'Revisions happen at sketch and underpainting stage, where changes are still cheap. Once the final layers are on, the piece is what it is.' },
   { term: 'If it is not right', detail: 'You are not obliged to take a piece you do not love. In that case the deposit stands, the work returns to me, and I may sell it on.' },
 ]
 
+// Bands follow the size bands above: A5 / A4 – A3 / A2 – A1 / A0.
 export const budgetRanges = [
-  'KES 8,000 – 45,000',
-  'KES 45,000 – 95,000',
-  'KES 95,000 – 180,000',
-  'KES 180,000 and above',
+  'KES 1,000 – 3,500',
+  'KES 3,500 – 7,000',
+  'KES 7,000 – 15,000',
+  'KES 15,000 – 25,000',
   'Not sure yet',
 ]
 

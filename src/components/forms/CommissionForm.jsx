@@ -1,4 +1,10 @@
-import { budgetRanges, pieceTypes, timelines } from '../../data/commissions'
+import { useImperativeHandle } from 'react'
+import {
+  budgetRanges,
+  commissionSizeOptions,
+  pieceTypes,
+  timelines,
+} from '../../data/commissions'
 import { email, minLength, phone, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
 import { Field, FileField, FormSuccess, Select, TextArea } from '../ui/Field'
@@ -9,7 +15,7 @@ const rules = {
   email,
   phone,
   pieceType: required('Type of piece'),
-  size: required('Approximate size'),
+  size: required('Size'),
   budget: required('Budget range'),
   timeline: required('Timeline'),
   description: minLength('A short description', 30),
@@ -27,13 +33,17 @@ const initialValues = {
   reference: null,
 }
 
-export default function CommissionForm() {
+export default function CommissionForm({ ref }) {
   const form = useForm({
     initialValues,
     rules,
     // Placeholder: no live submission. Post `values` to your endpoint here.
     onSubmit: () => new Promise((resolve) => setTimeout(resolve, 900)),
   })
+
+  // The pricing cards say "Enquire about A3", so the size has to travel with
+  // the click. Setting the one field keeps whatever else is already typed.
+  useImperativeHandle(ref, () => ({ setSize: (size) => form.setValue('size', size) }), [form])
 
   if (form.status === 'success') {
     return (
@@ -66,9 +76,10 @@ export default function CommissionForm() {
       </div>
 
       <div className="grid gap-9 sm:grid-cols-2">
-        <Field
-          label="Approximate size"
-          placeholder="e.g. 120 × 90 cm, or the wall is 3 m wide"
+        <Select
+          label="Size"
+          placeholder="Choose one"
+          options={commissionSizeOptions}
           {...form.field('size')}
         />
         <Select
