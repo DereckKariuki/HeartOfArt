@@ -42,7 +42,7 @@ export default function ProductCard({ product, index = 0 }) {
           <div className="shrink-0 text-right">
             <StatusBadge status={product.status} />
             <p className="mt-2 font-sans text-base tabular-nums text-ink">
-              {sold ? '—' : lowest != null ? from(lowest) : price(product.price)}
+              {sold ? '—' : lowest != null ? from(lowest) : (price(product.price) ?? 'On request')}
             </p>
           </div>
         </div>

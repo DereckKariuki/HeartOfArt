@@ -127,7 +127,9 @@ function Featured() {
                 {piece.title}
                 <span className="text-muted">, {piece.year}</span>
               </h3>
-              <p className="mt-1.5 text-base text-muted">{piece.dimensions}</p>
+              {piece.dimensions ? (
+                <p className="mt-1.5 text-base text-muted">{piece.dimensions}</p>
+              ) : null}
             </Link>
           </Reveal>
         ))}

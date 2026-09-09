@@ -115,18 +115,22 @@ export default function Lightbox({ pieces, index, onClose, onNavigate }) {
                 <dt className="label w-24 shrink-0 pt-1 text-taupe">Medium</dt>
                 <dd className="text-canvas/90">{piece.medium}</dd>
               </div>
-              <div className="flex gap-4">
-                <dt className="label w-24 shrink-0 pt-1 text-taupe">Size</dt>
-                <dd className="text-canvas/90">{piece.dimensions}</dd>
-              </div>
+              {piece.dimensions ? (
+                <div className="flex gap-4">
+                  <dt className="label w-24 shrink-0 pt-1 text-taupe">Size</dt>
+                  <dd className="text-canvas/90">{piece.dimensions}</dd>
+                </div>
+              ) : null}
               <div className="flex gap-4">
                 <dt className="label w-24 shrink-0 pt-1 text-taupe">Price</dt>
                 <dd className="text-canvas/90">
                   {piece.status === 'sold'
                     ? 'Sold'
-                    : piece.price
-                      ? price(piece.price)
-                      : 'Available as a print'}
+                    : piece.status === 'print-only'
+                      ? 'Available as a print'
+                      : piece.price
+                        ? price(piece.price)
+                        : 'Price on request'}
                 </dd>
               </div>
             </dl>

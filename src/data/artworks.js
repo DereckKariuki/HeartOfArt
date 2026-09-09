@@ -14,10 +14,11 @@ import { artist } from './site'
  * `price`  — whole KES. Omit for sold pieces.
  */
 
-export const COLLECTIONS = ['Portraits', 'Landscapes', 'Afternoon Rooms', 'Market Mornings', 'Paper Weather']
+export const COLLECTIONS = ['Portraits', 'Studies', 'Landscapes', 'Afternoon Rooms', 'Market Mornings', 'Paper Weather']
 
 export const MEDIUMS = [
   'Charcoal and paint on canvas',
+  'Coloured pencil on paper',
   'Paint on canvas',
   'Charcoal on paper',
 ]
@@ -58,30 +59,32 @@ export const artworks = [
     image: '/images/artwork/ngara-window-charcoal-and-paint-on-canvas.jpg',
   },
   {
-    id: 'woman-carrying-morning',
-    title: 'Woman Carrying Morning',
-    year: 2025,
-    collection: 'Market Mornings',
-    medium: 'Charcoal and paint on canvas',
-    dimensions: '150 × 110 cm',
-    ratio: '4/5',
+    id: 'newborn',
+    // REPLACE: working titles. These describe the subject — they are not
+    // titles you gave, and they are the first thing a visitor reads.
+    title: 'Newborn',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
     status: 'available',
-    price: 150000,
-    note: 'The largest piece in the series. She is not one person — she is composited from four mornings at Kariokor, sketched from the far side of the road.',
-    image: '/images/artwork/woman-carrying-morning-charcoal-and-paint-on-canvas.jpg',
+    price: null, // REPLACE: shows "Price on request" until this is a number.
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/newborn-charcoal-on-paper.jpg',
   },
   {
-    id: 'kariokor-blue',
-    title: 'Kariokor Blue',
-    year: 2024,
-    collection: 'Market Mornings',
-    medium: 'Paint on canvas',
-    dimensions: '90 × 70 cm',
-    ratio: '9/7',
+    id: 'portrait-with-glasses',
+    title: 'Portrait with Glasses',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
     status: 'available',
-    price: 96000,
-    note: 'One colour carried the whole piece — a blue tarpaulin that shaded half a row of stalls.',
-    image: '/images/artwork/kariokor-blue-paint-on-canvas.jpg',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/portrait-with-glasses-charcoal-on-paper.jpg',
   },
   {
     id: 'the-quiet-after',
@@ -108,30 +111,30 @@ export const artworks = [
     image: '/images/artwork/paper-weather-i-charcoal-on-paper.jpg',
   },
   {
-    id: 'paper-weather-iv',
-    title: 'Paper Weather IV',
-    year: 2024,
-    collection: 'Paper Weather',
+    id: 'caged',
+    title: 'Caged',
+    year: 2026,
+    collection: 'Portraits',
     medium: 'Charcoal on paper',
-    dimensions: '56 × 42 cm',
-    ratio: '4/3',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
     status: 'available',
-    price: 42000,
-    note: 'Rain on the fourth day. Compressed charcoal, a wet brush and a great deal of water.',
-    image: '/images/artwork/paper-weather-iv-charcoal-on-paper.jpg',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/caged-charcoal-on-paper.jpg',
   },
   {
-    id: 'three-chairs-riverside',
-    title: 'Three Chairs, Riverside',
-    year: 2025,
-    collection: 'Afternoon Rooms',
-    medium: 'Paint on canvas',
-    dimensions: '70 × 100 cm',
-    ratio: '10/7',
+    id: 'horse',
+    title: 'Horse',
+    year: 2026,
+    collection: 'Studies',
+    medium: 'Coloured pencil on paper',
+    dimensions: null, // REPLACE
+    ratio: '4/3',
     status: 'available',
-    price: 88000,
-    note: 'Painted in one week, which is unusual for me. The chairs belong to the café below the studio.',
-    image: '/images/artwork/three-chairs-riverside-paint-on-canvas.jpg',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/horse-coloured-pencil-on-paper.jpg',
   },
   {
     id: 'mama-mboga',
@@ -146,17 +149,17 @@ export const artworks = [
     image: '/images/artwork/mama-mboga-charcoal-and-paint-on-canvas.jpg',
   },
   {
-    id: 'hot-tin-roof',
-    title: 'Hot Tin Roof',
-    year: 2022,
-    collection: 'Market Mornings',
-    medium: 'Paint on canvas',
-    dimensions: '60 × 60 cm',
-    ratio: '1/1',
+    id: 'portrait-of-a-man',
+    title: 'Portrait of a Man',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
     status: 'available',
-    price: 54000,
-    note: 'An early piece, and still the closest I have come to painting heat rather than light.',
-    image: '/images/artwork/hot-tin-roof-paint-on-canvas.jpg',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/portrait-of-a-man-charcoal-on-paper.jpg',
   },
   {
     id: 'unfinished-letter',
@@ -259,6 +262,14 @@ export const artworks = [
 ]
 
 export const getArtwork = (id) => artworks.find((piece) => piece.id === id)
+
+/**
+ * A piece is buyable only when it is for sale AND carries a price. A real
+ * work whose figure is not set yet is not free — the site says "price on
+ * request" and routes to an enquiry rather than adding KES 0 to a cart.
+ */
+export const isPurchasable = (piece) =>
+  piece.status !== 'sold' && piece.price != null
 
 /** Alt text is derived so no piece can ship without it: title, medium, artist. */
 export const artworkAlt = (piece) =>

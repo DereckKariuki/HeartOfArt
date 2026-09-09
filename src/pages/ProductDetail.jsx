@@ -67,6 +67,9 @@ export default function ProductDetail() {
   const basePrice = size ? size.price : (product?.price ?? 0)
   const unitPrice = basePrice + (framing?.surcharge ?? 0)
   const sold = product?.status === 'sold'
+  // A real work whose figure is not set yet: everything about it is for sale
+  // except the number, so it takes the enquiry path rather than the cart.
+  const unpriced = !sold && product != null && product.price == null && !product.sizes
 
   usePageMeta({
     title: product ? `${product.title} — ${product.kind === 'print' ? 'limited print' : 'original painting'}` : 'Not found',
@@ -160,9 +163,9 @@ export default function ProductDetail() {
             <p className="mt-3 text-[1.0625rem] text-muted">{product.year}</p>
 
             <p className="mt-8 font-serif text-[2rem] font-light tabular-nums text-ink">
-              {sold ? 'Sold' : price(unitPrice)}
+              {sold ? 'Sold' : unpriced ? 'Price on request' : price(unitPrice)}
             </p>
-            {!sold && framing.surcharge > 0 ? (
+            {!sold && !unpriced && framing.surcharge > 0 ? (
               <p className="mt-1 text-base text-muted">
                 Includes {price(framing.surcharge)} for framing.
               </p>
@@ -196,23 +199,26 @@ export default function ProductDetail() {
             </dl>
           </Reveal>
 
-          {sold ? (
+          {sold || unpriced ? (
             <div className="mt-10 border border-taupe/70 bg-bone/50 px-7 py-8">
-              <h2 className="font-serif text-xl font-light text-ink">This one has gone</h2>
+              <h2 className="font-serif text-xl font-light text-ink">
+                {sold ? 'This one has gone' : 'Price on request'}
+              </h2>
               <p className="mt-3 text-[1.0625rem] leading-relaxed text-muted">
-                It is in a private collection now. A print may exist, and a piece in the
-                same register can be commissioned.
+                {sold
+                  ? 'It is in a private collection now. A print may exist, and a piece in the same register can be commissioned.'
+                  : 'This piece is available. Send an enquiry and the studio will come back with the price, the exact size and what delivery would cost.'}
               </p>
               <div className="mt-7 flex flex-wrap gap-4">
-                <Button to="/commissions" variant="outline" size="small">
-                  Commission something similar
-                </Button>
                 <Button
                   to={`/contact?piece=${encodeURIComponent(product.title)}`}
-                  variant="quiet"
+                  variant={sold ? 'quiet' : 'outline'}
                   size="small"
                 >
-                  Ask about it
+                  {sold ? 'Ask about it' : 'Enquire about this piece'}
+                </Button>
+                <Button to="/commissions" variant="quiet" size="small">
+                  {sold ? 'Commission something similar' : 'Commission a piece'}
                 </Button>
               </div>
             </div>
