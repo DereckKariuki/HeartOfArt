@@ -1,4 +1,3 @@
-import { useCallback, useRef } from 'react'
 import {
   commissionHero,
   commissionMediums,
@@ -84,7 +83,7 @@ function Process() {
   )
 }
 
-function Tiers({ onEnquire }) {
+function Tiers() {
   const { range } = useCurrency()
 
   return (
@@ -122,11 +121,10 @@ function Tiers({ onEnquire }) {
                 ))}
               </ul>
               <Button
-                href="#enquiry"
+                to={`/contact?commission=${tier.name}`}
                 variant="outline"
                 size="small"
                 className="mt-10"
-                onClick={() => onEnquire(tier.name)}
               >
                 Enquire about {tier.name}
               </Button>
@@ -189,7 +187,7 @@ function Terms() {
   )
 }
 
-function Enquiry({ formRef }) {
+function Enquiry() {
   return (
     <section id="enquiry" className="scroll-mt-28 border-t border-taupe/50 bg-bone/40">
       <div className="mx-auto max-w-shell px-6 py-28 md:px-12 md:py-36 lg:px-16">
@@ -206,7 +204,7 @@ function Enquiry({ formRef }) {
             </p>
           </Reveal>
           <div className="lg:col-span-7 lg:col-start-6">
-            <CommissionForm ref={formRef} />
+            <CommissionForm />
           </div>
         </div>
       </div>
@@ -221,19 +219,14 @@ export default function Commissions() {
       `Commission an original charcoal, paint or coloured pencil work from ${artist.name}. Six sizes from A5 to A0, KES 1,000 to KES 25,000, one to seven weeks.`,
   })
 
-  // The pricing buttons name a size; this hands that size to the form they
-  // scroll to, so the visitor does not have to pick it a second time.
-  const formRef = useRef(null)
-  const selectSize = useCallback((size) => formRef.current?.setSize(size), [])
-
   return (
     <>
       <Hero />
       <Process />
-      <Tiers onEnquire={selectSize} />
+      <Tiers />
       <ProgressGallery />
       <Terms />
-      <Enquiry formRef={formRef} />
+      <Enquiry />
     </>
   )
 }

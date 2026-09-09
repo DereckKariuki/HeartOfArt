@@ -1,4 +1,3 @@
-import { useImperativeHandle } from 'react'
 import {
   budgetRanges,
   commissionSizeOptions,
@@ -33,17 +32,13 @@ const initialValues = {
   reference: null,
 }
 
-export default function CommissionForm({ ref }) {
+export default function CommissionForm() {
   const form = useForm({
     initialValues,
     rules,
     // Placeholder: no live submission. Post `values` to your endpoint here.
     onSubmit: () => new Promise((resolve) => setTimeout(resolve, 900)),
   })
-
-  // The pricing cards say "Enquire about A3", so the size has to travel with
-  // the click. Setting the one field keeps whatever else is already typed.
-  useImperativeHandle(ref, () => ({ setSize: (size) => form.setValue('size', size) }), [form])
 
   if (form.status === 'success') {
     return (
