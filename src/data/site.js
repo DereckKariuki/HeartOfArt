@@ -41,7 +41,7 @@ export const artist = {
   name: 'Dereck Kariuki',
   role: 'Charcoal on paper, paint on canvas',
   location: 'Digital Studio',
-  portrait: '/images/artist/dereck-kariuki-portrait-nairobi.jpg',
+  portrait: '/images/artist/dereck-kariuki-portrait.jpg',
   portraitAlt: 'Dereck Kariuki, photographed outdoors',
   // The opening of the statement. The home page shows this much and links
   // through to About, which carries the whole thing — so the two are not the

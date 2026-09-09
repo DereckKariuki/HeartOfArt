@@ -69,7 +69,7 @@ export async function submitOrder(order) {
 /** REPLACE: real delivery methods and fees (whole KES). */
 export const deliveryMethods = [
   {
-    id: 'nairobi',
+    id: 'local',
     label: 'Local delivery',
     detail: 'Hand-carried by the studio, 2 – 4 working days. Hanging on request.',
     fee: 0,

@@ -30,7 +30,7 @@ const initialValues = {
   address: '',
   city: '',
   country: 'Kenya',
-  method: 'nairobi',
+  method: 'local',
   notes: '',
 }
 
