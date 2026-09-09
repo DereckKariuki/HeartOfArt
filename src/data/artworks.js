@@ -14,27 +14,12 @@ import { artist } from './site'
  * `price`  — whole KES. Omit for sold pieces.
  */
 
-export const COLLECTIONS = ['Portraits', 'Studies', 'Landscapes', 'Afternoon Rooms', 'Market Mornings', 'Paper Weather']
-
-export const MEDIUMS = [
-  'Charcoal and paint on canvas',
-  'Coloured pencil on paper',
-  'Paint on canvas',
-  'Charcoal on paper',
-]
-
-export const STATUSES = [
-  { value: 'available', label: 'Available' },
-  { value: 'sold', label: 'Sold' },
-  { value: 'print-only', label: 'Print only' },
-]
-
 export const artworks = [
   {
     id: 'ocean-view',
     title: 'Ocean View',
     year: 2026,
-    collection: 'Afternoon Rooms',
+    collection: 'Landscapes',
     medium: 'Paint on canvas',
     dimensions: '30 × 20 cm',
     ratio: '3/2',
@@ -45,18 +30,6 @@ export const artworks = [
     image: '/images/artwork/ocean-view-paint-on-canvas.jpg',
     featured: true,
     hero: true,
-  },
-  {
-    id: 'ngara-window',
-    title: 'Ngara Window',
-    year: 2024,
-    collection: 'Afternoon Rooms',
-    medium: 'Charcoal and paint on canvas',
-    dimensions: '100 × 80 cm',
-    ratio: '5/4',
-    status: 'sold',
-    note: 'Painted from memory of a rented room I lived in for two years. The window frame is the one line I drew first and never corrected.',
-    image: '/images/artwork/ngara-window-charcoal-and-paint-on-canvas.jpg',
   },
   {
     id: 'newborn',
@@ -87,30 +60,6 @@ export const artworks = [
     image: '/images/artwork/portrait-with-glasses-charcoal-on-paper.jpg',
   },
   {
-    id: 'the-quiet-after',
-    title: 'The Quiet After',
-    year: 2023,
-    collection: 'Afternoon Rooms',
-    medium: 'Charcoal and paint on canvas',
-    dimensions: '80 × 80 cm',
-    ratio: '1/1',
-    status: 'sold',
-    note: 'A room ten minutes after everyone has left it. The chair is the only thing I painted from life.',
-    image: '/images/artwork/the-quiet-after-charcoal-and-paint-on-canvas.jpg',
-  },
-  {
-    id: 'paper-weather-i',
-    title: 'Paper Weather I',
-    year: 2024,
-    collection: 'Paper Weather',
-    medium: 'Charcoal on paper',
-    dimensions: '56 × 42 cm',
-    ratio: '4/3',
-    status: 'print-only',
-    note: 'The first of nine studies made during a long rainy season. The originals are held together as a set.',
-    image: '/images/artwork/paper-weather-i-charcoal-on-paper.jpg',
-  },
-  {
     id: 'caged',
     title: 'Caged',
     year: 2026,
@@ -137,18 +86,6 @@ export const artworks = [
     image: '/images/artwork/horse-coloured-pencil-on-paper.jpg',
   },
   {
-    id: 'mama-mboga',
-    title: 'Mama Mboga',
-    year: 2023,
-    collection: 'Market Mornings',
-    medium: 'Charcoal and paint on canvas',
-    dimensions: '110 × 85 cm',
-    ratio: '13/10',
-    status: 'sold',
-    note: 'Sixteen years in the same spot on the same corner. I asked before I painted her.',
-    image: '/images/artwork/mama-mboga-charcoal-and-paint-on-canvas.jpg',
-  },
-  {
     id: 'portrait-of-a-man',
     title: 'Portrait of a Man',
     year: 2026,
@@ -160,32 +97,6 @@ export const artworks = [
     price: null, // REPLACE
     note: 'REPLACE: a note in the artist’s voice about this piece.',
     image: '/images/artwork/portrait-of-a-man-charcoal-on-paper.jpg',
-  },
-  {
-    id: 'unfinished-letter',
-    title: 'Unfinished Letter',
-    year: 2025,
-    collection: 'Paper Weather',
-    medium: 'Charcoal on paper',
-    dimensions: '42 × 30 cm',
-    ratio: '7/5',
-    status: 'available',
-    price: 28000,
-    note: 'Drawn out of a letter I could not send. The words are under the charcoal now; only the ruled lines still show.',
-    image: '/images/artwork/unfinished-letter-charcoal-on-paper.jpg',
-  },
-  {
-    id: 'study-for-ocean-view',
-    title: 'Study for Ocean View',
-    year: 2024,
-    collection: 'Paper Weather',
-    medium: 'Charcoal on paper',
-    dimensions: '30 × 24 cm',
-    ratio: '5/4',
-    status: 'available',
-    price: 18000,
-    note: 'One of five studies for the larger canvas. Small, and the one I nearly kept.',
-    image: '/images/artwork/study-for-ocean-view-charcoal-on-paper.jpg',
   },
   // ── Photographed work. Everything above this line is still placeholder. ──
   {
@@ -259,7 +170,93 @@ export const artworks = [
     image: '/images/artwork/couple-charcoal-on-paper.jpg',
     featured: true,
   },
+  {
+    id: 'child-at-the-wall',
+    title: 'Child at the Wall',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
+    status: 'available',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/child-at-the-wall-charcoal-on-paper.jpg',
+  },
+  {
+    id: 'santa-and-sleeping-child',
+    title: 'Santa and Sleeping Child',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
+    status: 'available',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/santa-and-sleeping-child-charcoal-on-paper.jpg',
+  },
+  {
+    id: 'lion',
+    title: 'Lion',
+    year: 2026,
+    collection: 'Studies',
+    medium: 'Coloured pencil on paper',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
+    status: 'available',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/lion-coloured-pencil-on-paper.jpg',
+  },
+  {
+    id: 'lion-on-the-rock',
+    title: 'Lion on the Rock',
+    year: 2026,
+    collection: 'Studies',
+    medium: 'Coloured pencil on paper',
+    dimensions: null, // REPLACE
+    ratio: '4/3',
+    status: 'available',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/lion-on-the-rock-coloured-pencil-on-paper.jpg',
+  },
+  {
+    id: 'man-in-a-suit',
+    title: 'Man in a Suit',
+    year: 2026,
+    collection: 'Portraits',
+    medium: 'Charcoal on paper',
+    dimensions: null, // REPLACE
+    ratio: '3/4',
+    status: 'available',
+    price: null, // REPLACE
+    note: 'REPLACE: a note in the artist’s voice about this piece.',
+    image: '/images/artwork/man-in-a-suit-charcoal-on-paper.jpg',
+  },
 ]
+
+/**
+ * Filter options are derived from the work, not maintained beside it. Listing
+ * them by hand meant a deleted piece could leave a collection or a medium in
+ * the filter bar that matched nothing — a control that looks broken when a
+ * visitor uses it.
+ */
+export const COLLECTIONS = [...new Set(artworks.map((piece) => piece.collection))]
+
+export const MEDIUMS = [...new Set(artworks.map((piece) => piece.medium))]
+
+const STATUS_LABELS = {
+  available: 'Available',
+  sold: 'Sold',
+  'print-only': 'Print only',
+}
+
+/** Only the states some piece is actually in. */
+export const STATUSES = Object.entries(STATUS_LABELS)
+  .filter(([value]) => artworks.some((piece) => piece.status === value))
+  .map(([value, label]) => ({ value, label }))
 
 export const getArtwork = (id) => artworks.find((piece) => piece.id === id)
 

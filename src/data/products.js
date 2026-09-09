@@ -64,7 +64,7 @@ export const prints = [
     artworkId: 'ocean-view',
     title: 'Ocean View',
     year: 2026,
-    collection: 'Afternoon Rooms',
+    collection: 'Landscapes',
     medium: 'Giclée on 310gsm cotton rag',
     ratio: '3/2',
     status: 'available',
@@ -90,113 +90,6 @@ export const prints = [
       {
         src: '/images/print/ocean-view-giclee-print-in-situ.jpg',
         alt: 'Ocean View print hung above a desk in a sunlit room, showing scale',
-        caption: 'In a room',
-      },
-    ],
-  },
-  {
-    id: 'print-woman-carrying-morning',
-    kind: 'print',
-    artworkId: 'woman-carrying-morning',
-    title: 'Woman Carrying Morning',
-    year: 2025,
-    collection: 'Market Mornings',
-    medium: 'Giclée on 310gsm cotton rag',
-    ratio: '4/5',
-    status: 'available',
-    edition: 'Limited edition of 50 per size. Numbered and signed in pencil in the margin.',
-    description:
-      'The portrait format of the original is kept exactly. Printed with pigment inks rated to two hundred years without visible shift.',
-    sizes: [
-      { id: 'a3', label: 'A3 — 30 × 42 cm', price: 8000 },
-      { id: 'a2', label: 'A2 — 42 × 59 cm', price: 14000 },
-      { id: 'a1', label: 'A1 — 59 × 84 cm', price: 24000 },
-    ],
-    images: [
-      {
-        src: '/images/print/woman-carrying-morning-giclee-print-on-cotton-rag.jpg',
-        alt: 'Woman Carrying Morning giclée print on cotton rag paper',
-        caption: 'The print',
-      },
-      {
-        src: '/images/print/woman-carrying-morning-giclee-print-framed-oak.jpg',
-        alt: 'Woman Carrying Morning print in a natural oak frame',
-        caption: 'Framed in oak',
-      },
-      {
-        src: '/images/print/woman-carrying-morning-giclee-print-in-situ.jpg',
-        alt: 'Woman Carrying Morning print hung in a hallway, showing scale',
-        caption: 'In a room',
-      },
-    ],
-  },
-  {
-    id: 'print-ngara-window',
-    kind: 'print',
-    artworkId: 'ngara-window',
-    title: 'Ngara Window',
-    year: 2024,
-    collection: 'Afternoon Rooms',
-    medium: 'Giclée on 310gsm cotton rag',
-    ratio: '5/4',
-    status: 'available',
-    edition: 'Open edition. Signed in pencil in the margin.',
-    description:
-      'The original is in a private collection in Kampala. This is the only way the piece is still available.',
-    sizes: [
-      { id: 'a3', label: 'A3 — 42 × 30 cm', price: 8000 },
-      { id: 'a2', label: 'A2 — 59 × 42 cm', price: 13000 },
-    ],
-    images: [
-      {
-        src: '/images/print/ngara-window-giclee-print-on-cotton-rag.jpg',
-        alt: 'Ngara Window giclée print on cotton rag paper',
-        caption: 'The print',
-      },
-      {
-        src: '/images/print/ngara-window-giclee-print-framed-oak.jpg',
-        alt: 'Ngara Window print in a natural oak frame',
-        caption: 'Framed in oak',
-      },
-      {
-        src: '/images/print/ngara-window-giclee-print-in-situ.jpg',
-        alt: 'Ngara Window print above a sideboard, showing scale',
-        caption: 'In a room',
-      },
-    ],
-  },
-  {
-    id: 'print-paper-weather-i',
-    kind: 'print',
-    artworkId: 'paper-weather-i',
-    title: 'Paper Weather I',
-    year: 2024,
-    collection: 'Paper Weather',
-    medium: 'Giclée on 310gsm cotton rag',
-    ratio: '4/3',
-    status: 'available',
-    edition: 'Limited edition of 75 per size. Numbered and signed in pencil in the margin.',
-    description:
-      'The studies were never sold individually. The print is how the series left the studio.',
-    sizes: [
-      { id: 'a4', label: 'A4 — 30 × 21 cm', price: 8000 },
-      { id: 'a3', label: 'A3 — 42 × 30 cm', price: 11000 },
-      { id: 'a2', label: 'A2 — 59 × 42 cm', price: 18000 },
-    ],
-    images: [
-      {
-        src: '/images/print/paper-weather-i-giclee-print-on-cotton-rag.jpg',
-        alt: 'Paper Weather I giclée print on cotton rag paper',
-        caption: 'The print',
-      },
-      {
-        src: '/images/print/paper-weather-i-giclee-print-framed-oak.jpg',
-        alt: 'Paper Weather I print in a natural oak frame with museum glass',
-        caption: 'Framed in oak',
-      },
-      {
-        src: '/images/print/paper-weather-i-giclee-print-in-situ.jpg',
-        alt: 'Paper Weather I print hung as a pair in a stairwell, showing scale',
         caption: 'In a room',
       },
     ],

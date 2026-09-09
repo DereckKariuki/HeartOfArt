@@ -116,40 +116,35 @@ square so the bar does not shift as the image decodes. If you change the
 header size, re-check it against `main`'s `pt-*` in `Layout.jsx` — that
 offset clears the fixed nav and there is only ~3px of slack.
 
-### 2. Artwork and photography — 56 files
+### 2. Artwork and photography
 
-Drop a real file at the path listed in `src/data/*.js` and the stand-in
-disappears automatically; no code change. **Keep the filenames** — they are
-descriptive on purpose, and they are what image search reads.
+Every one of the 16 pieces in the portfolio is now a real photograph — there
+are no generated stand-ins left anywhere on the site. What is still missing is
+the information around them.
 
-| Count | What | Where the paths are | Shoot at |
-|---:|---|---|---|
-| 12 | The artworks themselves | `artworks.js` → `image` | ≥3000px on the long edge, straight-on, colour-accurate |
-| 11 | Each original in a frame | `products.js` (derived) | 4:3, plain wall |
-| 11 | Each original in a room | `products.js` (derived) | 4:3, shows scale |
-| 12 | Prints — flat, framed, in a room (4 editions × 3) | `products.js` → `prints[].images` | flat = the print's ratio; other two 4:3 |
-| 1 | Home hero background | `site.js` → `heroImage` | landscape, 1600px+ — an in-situ shot reads best at full bleed |
-| 1 | Artist portrait | `site.js` → `artist.portrait` | supplied — the About banner anchors its crop near the top so a standing shot keeps its head |
-| 4 | Studio process details | `site.js` → `artist.process` | 1:1 |
-| 1 | Commission hero | `commissions.js` → `commissionHero` | supplied — also feeds the home page teaser |
-| 4 | Commission progress | `commissions.js` → `progressGallery` | 4:5 |
+**Titles.** Eleven pieces carry working titles that describe the subject
+(`Newborn`, `Caged`, `Lion on the Rock`, `Man in a Suit`, …). They are marked
+`REPLACE` in `artworks.js`. A title is the first thing a visitor reads, and
+these are not names you gave.
 
-Six pieces are photographed and in the repo — `Ocean View` (which doubles as
-the home hero), `Come to the Father`, `Ocean View` (sailboat), `Sunset`,
-`Graduand Portrait` and `Couple`. Those six are the home page's featured
-selection. Every other path in the table is still a stand-in, and the eleven
-placeholder pieces stay in the portfolio until you replace them.
+**Prices and sizes.** Ten pieces have `price: null` and `dimensions: null`.
+That is a deliberate state, not missing data: the site says "price on request"
+and the product page offers an enquiry instead of a cart. Set a number and the
+piece becomes buyable; leave it and nothing is misrepresented. `isPurchasable()`
+in `artworks.js` is the single answer to whether a piece can be bought.
 
-All six are in-situ photographs. The grid crops them to 4:5, which mostly
-trims wall on the portrait ones but does clip the edges of the landscape
-pieces; a flat, straight-on shot at the same path will always sit better in
-the grid, and the lightbox shows whatever you supply in full.
+**Notes.** Every piece's `note` is a `REPLACE` placeholder. It is the paragraph
+in the lightbox and on the product page.
 
-The portfolio grid crops every piece to a shared 4:5 so the page reads as a
-hang; the lightbox uses each piece's true `ratio`, so set that per piece.
+Photography that would still improve the site:
 
-If you have no progress photography yet, empty the `progressGallery` array and
-that whole section drops out of the commissions page cleanly.
+| What | Where the paths are | Shoot at |
+|---|---|---|
+| Flat, straight-on shots of each piece | `artworks.js` → `image` | The supplied photographs are in-situ, so the 4:5 grid crop trims wall on portrait pieces and clips the edges of landscape ones |
+| Each original framed, and in a room | `products.js` (derived from the artwork path) | 4:3 — these feed the shop's second and third gallery tabs |
+| The print edition — flat, framed, in a room | `products.js` → `prints[].images` | Only one print edition remains; its three photographs are still stand-ins |
+| Four commission progress shots | `commissions.js` → `progressGallery` | 4:5. Empty the array and that section disappears |
+| Four studio process shots | `site.js` → `artist.process` | 1:1 — and that copy is still invented, see below |
 
 ### 3. Copy and details
 
