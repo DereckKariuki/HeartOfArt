@@ -96,8 +96,8 @@ export const contact = {
   instagramHref: 'https://www.instagram.com/heartofart_4d',
   youtube: '@HeartOfArt-4d',
   youtubeHref: 'https://www.youtube.com/@HeartOfArt-4d',
-  tiktok: '@kariuki_creates',
-  tiktokHref: 'https://www.tiktok.com/@kariuki_creates',
+  tiktok: '@heart_of_art0',
+  tiktokHref: 'https://www.tiktok.com/@heart_of_art0',
   studio: {
     lines: ['HeartOfArt', 'Digital Studio'],
     // REPLACE: how you actually want people to arrange a piece. The old line
