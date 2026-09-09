@@ -70,14 +70,14 @@ export async function submitOrder(order) {
 export const deliveryMethods = [
   {
     id: 'nairobi',
-    label: 'Nairobi delivery',
+    label: 'Local delivery',
     detail: 'Hand-carried by the studio, 2 – 4 working days. Hanging on request.',
     fee: 0,
   },
   {
     id: 'countrywide',
     label: 'Countrywide courier',
-    detail: 'Insured, 3 – 7 working days anywhere in Kenya.',
+    detail: 'Insured, 3 – 7 working days countrywide.',
     fee: 2500,
   },
   {

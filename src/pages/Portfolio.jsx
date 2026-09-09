@@ -14,7 +14,7 @@ export default function Portfolio() {
   usePageMeta({
     title: 'Portfolio',
     description:
-      `Paintings and works on paper by ${artist.name}, filterable by collection, medium and availability. Nairobi, Kenya.`,
+      `Paintings and works on paper by ${artist.name}, filterable by collection, medium and availability.`,
   })
 
   const [searchParams, setSearchParams] = useSearchParams()

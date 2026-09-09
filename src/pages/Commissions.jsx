@@ -209,7 +209,7 @@ export default function Commissions() {
   usePageMeta({
     title: 'Commissions',
     description:
-      `Commission an original charcoal or painted work from ${artist.name} in Nairobi. Three size tiers from KES 45,000, four to sixteen weeks, framing and delivery included.`,
+      `Commission an original charcoal or painted work from ${artist.name}. Three size tiers from KES 45,000, four to sixteen weeks, framing and delivery included.`,
   })
 
   return (

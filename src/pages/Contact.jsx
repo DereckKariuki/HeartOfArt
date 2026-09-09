@@ -19,7 +19,7 @@ export default function Contact() {
   usePageMeta({
     title: 'Contact',
     description:
-      'Enquire about a piece, a print or a commission. HeartOfArt is a digital studio in Nairobi, Kenya — everything is arranged online.',
+      'Enquire about a piece, a print or a commission. HeartOfArt is a digital studio — everything is arranged online.',
   })
 
   const [searchParams] = useSearchParams()

@@ -11,13 +11,13 @@ import { artworks, artworkAlt } from './artworks'
 // REPLACE: framing options and their surcharges (whole KES).
 export const framingOptions = [
   { id: 'unframed', label: 'Unframed', surcharge: 0, note: 'Originals arrive stretched and ready to hang; prints ship flat with their margin intact.' },
-  { id: 'oak', label: 'Natural oak float frame', surcharge: 14000, note: 'Hand-finished in Nairobi. Adds 3 cm on each side.' },
+  { id: 'oak', label: 'Natural oak float frame', surcharge: 14000, note: 'Hand-finished to order. Adds 3 cm on each side.' },
   { id: 'ash', label: 'Blackened ash frame', surcharge: 16000, note: 'Matte black, museum glass on works on paper.' },
 ]
 
 // REPLACE: your real shipping terms.
 export const shippingNote =
-  'Originals ship rolled or crated depending on size. Nairobi delivery is hand-carried by the studio; countrywide and international orders go by insured courier. Framed work is packed flat in a custom crate.'
+  'Originals ship rolled or crated depending on size. Local delivery is hand-carried by the studio; countrywide and international orders go by insured courier. Framed work is packed flat in a custom crate.'
 
 const inSituAlt = (piece) =>
   `${piece.title} hung above a low sideboard in a sunlit room, showing scale`

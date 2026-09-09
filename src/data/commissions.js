@@ -43,7 +43,7 @@ export const commissionSteps = [
   {
     n: '04',
     title: 'Delivery',
-    body: 'The balance falls due on completion. Framed work is crated and hung by the studio anywhere in Nairobi; elsewhere it goes by insured courier.',
+    body: 'The balance falls due on completion. Framed work is crated, and hung by the studio where that is possible; elsewhere it goes by insured courier.',
   },
 ]
 
@@ -55,11 +55,11 @@ export const commissionTiers = [
     from: 45000,
     lead: '4 – 6 weeks',
     includes: [
-      'Cotton canvas on a Kenyan pine stretcher',
+      'Cotton canvas on a pine stretcher',
       'One composition sketch',
       'One round of revisions before the final layer',
       'Unframed, ready to hang',
-      'Nairobi delivery included',
+      'Local delivery included',
     ],
   },
   {
@@ -73,7 +73,7 @@ export const commissionTiers = [
       'Two composition sketches',
       'Two rounds of revisions',
       'Natural oak or blackened ash float frame',
-      'Nairobi delivery and hanging included',
+      'Local delivery and hanging included',
     ],
     highlight: true,
   },

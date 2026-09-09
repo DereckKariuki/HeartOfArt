@@ -93,7 +93,7 @@ function OrderSummary({ items, subtotal, deliveryFee, total }) {
 export default function Checkout() {
   usePageMeta({
     title: 'Checkout',
-    description: 'Complete your order of original work or limited prints from HeartOfArt, Nairobi.',
+    description: 'Complete your order of original work or limited prints from HeartOfArt.',
   })
 
   const { items, subtotal, clearCart } = useCart()

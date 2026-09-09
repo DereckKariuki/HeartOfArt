@@ -1,7 +1,7 @@
 # HeartOfArt
 
-The gallery, shop and commissions site for HeartOfArt — a painting studio in
-Nairobi. React 19, Vite, Tailwind, `react-router-dom`, `lucide-react`.
+The gallery, shop and commissions site for HeartOfArt — charcoal on paper,
+paint on canvas. React 19, Vite, Tailwind, `react-router-dom`, `lucide-react`.
 
 ```bash
 npm install

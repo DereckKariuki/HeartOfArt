@@ -16,9 +16,9 @@ export const site = {
   heroLine:
     'Charcoal on paper, paint on canvas, all this to capture emotions, feelings, and stories that connect with the Heart.',
   description:
-    'HeartOfArt is the studio of Dereck Kariuki, working in charcoal on paper and paint on canvas in Nairobi. Original work, limited prints and commissions.',
+    'HeartOfArt is the studio of Dereck Kariuki, working in charcoal on paper and paint on canvas. Original work, limited prints and commissions.',
   founded: 2016,
-  city: 'Nairobi, Kenya',
+  city: 'Digital Studio',
   // REPLACE: the full-bleed image behind the top of the home page.
   // Deliberately an in-situ photograph rather than a flat shot of the work: a
   // room reads at full bleed and gives a visitor the scale straight away,
@@ -27,7 +27,7 @@ export const site = {
   // artworks.js, so keep the two describing the same piece.
   heroImage: '/images/artwork/ocean-view-paint-on-canvas.jpg',
   heroImageAlt:
-    'Ocean View, 2026 — a small seascape in paint on canvas, hung on a plaster wall in a Nairobi interior',
+    'Ocean View, 2026 — a small seascape in paint on canvas, hung on a plaster wall',
   // REPLACE: the circular brand mark. Save the file as
   // public/heartofart-logo.png and it appears in the header, the footer and
   // the browser tab. Square source with the medallion centred — the circle is
@@ -40,9 +40,9 @@ export const site = {
 export const artist = {
   name: 'Dereck Kariuki',
   role: 'Charcoal on paper, paint on canvas',
-  location: 'Nairobi, Kenya',
+  location: 'Digital Studio',
   portrait: '/images/artist/dereck-kariuki-portrait-nairobi.jpg',
-  portraitAlt: 'Dereck Kariuki, photographed outdoors in Nairobi',
+  portraitAlt: 'Dereck Kariuki, photographed outdoors',
   // The opening of the statement. The home page shows this much and links
   // through to About, which carries the whole thing — so the two are not the
   // same words twice and "Read the full story" leads somewhere.
