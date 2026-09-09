@@ -84,14 +84,6 @@ function Process() {
   )
 }
 
-// "paint on canvas, charcoal on paper or coloured pencil on paper" — read
-// mid-sentence, so the first word is lowercased and the last takes an "or".
-function listMediums(mediums) {
-  const lower = mediums.map((m) => m.charAt(0).toLowerCase() + m.slice(1))
-  if (lower.length < 2) return lower.join('')
-  return `${lower.slice(0, -1).join(', ')} or ${lower[lower.length - 1]}`
-}
-
 function Tiers({ onEnquire }) {
   const { range } = useCurrency()
 
@@ -101,7 +93,7 @@ function Tiers({ onEnquire }) {
         <SectionHeading
           eyebrow="Pricing"
           title="Six sizes, A5 up to A0"
-          standfirst={`Every size is made in ${listMediums(commissionMediums)}. Where a piece lands inside its range depends on the medium, the subject and how much is in the frame — the quote you receive is fixed and itemised.`}
+          standfirst="Where a piece lands inside its range depends on the medium, the subject and how much is in the frame. The quote you receive is fixed and itemised."
         />
 
         <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -109,7 +101,7 @@ function Tiers({ onEnquire }) {
             <Reveal
               key={tier.id}
               delay={index * 90}
-              className="border border-taupe/60 bg-canvas px-8 py-10"
+              className="flex flex-col border border-taupe/60 bg-canvas px-8 py-10"
             >
               <h3 className="font-serif text-[1.9rem] font-light text-ink">{tier.name}</h3>
               <p className="mt-3 text-base leading-snug text-muted">{tier.dimensions}</p>
@@ -117,12 +109,23 @@ function Tiers({ onEnquire }) {
                 {range(tier.from, tier.to)}
               </p>
               <p className="label mt-3">{tier.lead}</p>
-              <hr className="hairline mt-8" />
+              <hr className="hairline my-8" />
+              <ul className="flex-1 space-y-3">
+                {commissionMediums.map((medium) => (
+                  <li
+                    key={medium}
+                    className="flex gap-3 text-[1.0625rem] leading-relaxed text-muted"
+                  >
+                    <span aria-hidden="true" className="mt-2.5 h-px w-3 shrink-0 bg-accent" />
+                    {medium}
+                  </li>
+                ))}
+              </ul>
               <Button
                 href="#enquiry"
                 variant="outline"
                 size="small"
-                className="mt-8"
+                className="mt-10"
                 onClick={() => onEnquire(tier.name)}
               >
                 Enquire about {tier.name}
