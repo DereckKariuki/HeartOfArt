@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
-import { Camera, Mail, MessageCircle, Phone } from 'lucide-react'
+import { Mail, MessageCircle, Phone } from 'lucide-react'
+import { Instagram, Tiktok, Youtube } from '../components/ui/SocialIcons'
 import { contact } from '../data/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 import Reveal from '../components/ui/Reveal'
@@ -9,7 +10,9 @@ const channels = [
   { label: 'Email', value: contact.email, href: `mailto:${contact.email}`, Icon: Mail },
   { label: 'Phone', value: contact.phone, href: contact.phoneHref, Icon: Phone },
   { label: 'WhatsApp', value: contact.whatsapp, href: contact.whatsappHref, Icon: MessageCircle },
-  { label: 'Instagram', value: contact.instagram, href: contact.instagramHref, Icon: Camera },
+  { label: 'Instagram', value: contact.instagram, href: contact.instagramHref, Icon: Instagram },
+  { label: 'YouTube', value: contact.youtube, href: contact.youtubeHref, Icon: Youtube },
+  { label: 'TikTok', value: contact.tiktok, href: contact.tiktokHref, Icon: Tiktok },
 ]
 
 export default function Contact() {

@@ -92,9 +92,12 @@ export const contact = {
   phoneHref: 'tel:+254110025232',
   whatsapp: '0110 025 232',
   whatsappHref: 'https://wa.me/254110025232',
-  // REPLACE: still a placeholder handle — nothing links here yet.
-  instagram: '@heartofart.ke',
-  instagramHref: 'https://instagram.com/heartofart.ke',
+  instagram: '@heartofart_4d',
+  instagramHref: 'https://www.instagram.com/heartofart_4d',
+  youtube: '@HeartOfArt-4d',
+  youtubeHref: 'https://www.youtube.com/@HeartOfArt-4d',
+  tiktok: '@kariuki_creates',
+  tiktokHref: 'https://www.tiktok.com/@kariuki_creates',
   studio: {
     lines: ['HeartOfArt', 'Digital Studio'],
     // REPLACE: how you actually want people to arrange a piece. The old line
