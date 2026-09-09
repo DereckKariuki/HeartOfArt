@@ -207,7 +207,15 @@ export const allProducts = [...originals, ...prints]
 
 export const getProduct = (id) => allProducts.find((product) => product.id === id)
 
-/** Lowest purchasable price across the catalogue, for "from" copy. */
+/**
+ * Lowest purchasable price across the catalogue, for "from" copy.
+ *
+ * Originals count too. This used to read prints only, which held while the
+ * cheapest print undercut every original — the moment one did not, the site
+ * advertised a floor above its own cheapest work. Sold originals are excluded
+ * because they carry no price and cannot be bought.
+ */
 export const priceFloor = Math.min(
+  ...originals.filter((o) => o.price != null).map((o) => o.price),
   ...prints.flatMap((p) => p.sizes.map((s) => s.price)),
 )

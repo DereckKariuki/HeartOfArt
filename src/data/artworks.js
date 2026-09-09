@@ -38,7 +38,7 @@ export const artworks = [
     dimensions: '30 × 20 cm',
     ratio: '3/2',
     status: 'available',
-    price: 148000,
+    price: 3000,
     // REPLACE: a note in the artist's voice about this piece.
     note: 'Surf coming in over red sand, painted small and close. The horizon sits high on purpose — most of the canvas is given to the water rather than the sky.',
     image: '/images/artwork/ocean-view-paint-on-canvas.jpg',
