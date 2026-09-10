@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { email, minLength, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
-import { sendEnquiry } from '../../lib/enquiry'
+import { FORMS, sendEnquiry } from '../../lib/enquiry'
 import { contact } from '../../data/site'
 import { Field, FormError, FormSuccess, TextArea } from '../ui/Field'
 import Button from '../ui/Button'
@@ -28,12 +28,17 @@ export default function ContactForm({ presetSubject = '' }) {
     onSubmit: async (values) => {
       setRoute(
         await sendEnquiry({
+          form: FORMS.contact,
           subject: values.subject,
+          // Keys are the field names Netlify registered; labels are how they
+          // read when the enquiry goes out through a mail app instead.
           fields: {
-            Name: values.name,
-            Email: values.email,
-            Message: values.message,
+            name: values.name,
+            email: values.email,
+            subject: values.subject,
+            message: values.message,
           },
+          labels: { name: 'Name', email: 'Email', message: 'Message' },
         }),
       )
     },

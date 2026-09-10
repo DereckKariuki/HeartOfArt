@@ -52,34 +52,44 @@ Delivery methods and fees live in the same file.
 
 ## Where enquiries go
 
-Both forms — contact and commission — send through one function,
-`sendEnquiry` in `src/lib/enquiry.js`. It is the only seam between the site
-and your inbox, the way `checkout.js` is the only seam to money.
+Both forms — contact and commission — send through one function, `sendEnquiry`
+in `src/lib/enquiry.js`. It is the only seam between the site and your inbox,
+the way `checkout.js` is the only seam to money.
 
-It has two modes:
+Delivery is **Netlify Forms**: Netlify receives the submission and emails it
+on, so no mail provider's API key ever reaches the browser. Three pieces have
+to agree.
 
-**Posted.** Set `VITE_ENQUIRY_ENDPOINT` to a URL that accepts a JSON POST and
-emails the result to `heartofart83@gmail.com`. The visitor never leaves the
-page. A browser cannot send mail on its own and must never hold a mail
-provider's API key — anyone can read it in the page source — so the endpoint
-has to keep that key on a server. Netlify Forms, Web3Forms, Formspree, or your
-own serverless function all do this without you running a server; the file
-lists what each needs. Whichever you choose, your visitors' names, emails and
-phone numbers pass through that company.
+1. **Netlify finds forms by reading the HTML it is handed at deploy time.**
+   This site renders its forms in JavaScript, which that reader never runs, so
+   `index.html` carries a hidden copy of each form listing every field by name.
+   Those copies are what Netlify registers. **Add a field to a form and add it
+   to the copy too, or it arrives blank.**
+2. **The React form posts the fields back** as `application/x-www-form-urlencoded`
+   with `form-name` naming which form it is. Names must match the hidden copies.
+3. **The notification address is set in Netlify, not in this repo.** After the
+   first deploy: *Site configuration → Forms → Form notifications → Add
+   notification → Email notification*, to `heartofart83@gmail.com`. Netlify
+   stores every submission either way; the notification is what reaches you.
 
-```bash
-# .env.local, not committed
-VITE_ENQUIRY_ENDPOINT=https://api.web3forms.com/submit
-```
+`netlify.toml` holds the build command, the publish directory and the SPA
+redirect. Each form carries a honeypot field, `bot-field` — no person sees it,
+so anything that fills it in is discarded.
 
-**Mail client.** With no endpoint set — the state it ships in — the enquiry is
-handed to the visitor's own mail app, addressed to the studio and already
-written out. They still press send there, and the form says so rather than
-claiming the message is on its way. It works with no setup, but some visitors
-have no mail app configured, and it cannot carry the reference image.
+**Off Netlify**, nothing can accept these posts: not `npm run dev`, not
+`vite preview`, not a static copy on disk. Posting anyway would either fail or
+return a page that looks like success while the enquiry went nowhere. So the
+build decides: Netlify sets `NETLIFY=true` in its build environment, and
+`vite.config.js` bakes that into `__NETLIFY_FORMS__`. Off it, the enquiry is
+handed to the visitor's own mail app, addressed to the studio and written out,
+and the form says so rather than claiming it has been sent.
 
-A failed send shows the studio's address inline so a visitor who has just
+A failed send shows the studio's address inline, so a visitor who has just
 typed out an enquiry does not lose it.
+
+The reference-image file is not transmitted by either route. The enquiry names
+the file and asks for it in the reply. Real uploads would need Netlify's
+file-upload support and a form encoded as multipart — a separate change.
 
 ## Design system
 

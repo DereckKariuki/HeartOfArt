@@ -3,56 +3,63 @@ import { contact } from '../data/site'
 /**
  * Where an enquiry goes when someone presses send.
  *
- * This is the one place that decides. Both forms — the contact form and the
- * commission form — call `sendEnquiry` and nothing else knows how delivery
- * works, the same way `checkout.js` is the only file that knows about money.
+ * This is the one place that decides. Both forms — contact and commission —
+ * call `sendEnquiry` and nothing else knows how delivery works, the same way
+ * `checkout.js` is the only seam between the storefront and money.
  *
  * ---------------------------------------------------------------------------
- * TWO MODES
+ * NETLIFY FORMS
  * ---------------------------------------------------------------------------
  *
- * 1. POSTED (what you want in the end).
- *    Set `VITE_ENQUIRY_ENDPOINT` to a URL that accepts a JSON POST and emails
- *    the result to heartofart83@gmail.com. The visitor never leaves the page.
+ * Netlify receives the submission and emails it on, so no mail provider's API
+ * key ever reaches the browser. Three things make it work, and all three have
+ * to agree:
  *
- *    A browser cannot send email on its own, and it must never hold a mail
- *    provider's API key — anyone can read it in the page source and send mail
- *    as you. So the endpoint has to be something that keeps the key on a
- *    server. Any of these work; none needs you to run a server:
+ * 1. Netlify finds forms by reading the HTML it is given at deploy time. This
+ *    site renders its forms in JavaScript, which that reader never runs — so
+ *    `index.html` carries a hidden copy of each form, listing every field by
+ *    name. That copy is what Netlify registers. If you add a field to a form,
+ *    add it there too or it arrives blank.
  *
- *      · Netlify Forms   — if you host on Netlify. Nothing to sign up for:
- *                          add `data-netlify="true"` to the form and set the
- *                          notification address in the Netlify dashboard.
- *      · Web3Forms       — free, gives you an access key by email in a minute.
- *                          Endpoint: https://api.web3forms.com/submit, and add
- *                          your key as `access_key` in the payload below.
- *      · Formspree       — free tier, endpoint looks like
- *                          https://formspree.io/f/xxxxxxxx
- *      · Your own function on Netlify / Vercel / Cloudflare, calling Resend
- *                          or SendGrid with the key in a server env var.
+ * 2. The React form posts the fields back as a normal form encoding, with
+ *    `form-name` naming which of the two it is. The names below must match
+ *    the hidden copies exactly.
  *
- *    Whichever you pick, your visitors' names, emails and phone numbers pass
- *    through that company. Read what they do with them before you choose.
+ * 3. The notification address is set in Netlify itself, not here:
+ *    Site configuration → Forms → Form notifications → Add notification →
+ *    Email notification, sent to heartofart83@gmail.com. Netlify holds the
+ *    submissions either way; the notification is what puts them in the inbox.
  *
- * 2. MAIL CLIENT (what happens until you set the endpoint).
- *    The enquiry is handed to the visitor's own mail app, addressed to you and
- *    already written out. They still have to press send there — so the form
- *    says exactly that rather than claiming the message is on its way. It
- *    reaches you with no setup at all, but some people have no mail app
- *    configured, and it cannot carry the reference image.
+ * Spam: each form carries a honeypot field called `bot-field`. A person never
+ * sees it, so anything that fills it in is discarded.
  *
  * ---------------------------------------------------------------------------
+ * EVERYWHERE THAT IS NOT NETLIFY
+ * ---------------------------------------------------------------------------
+ *
+ * Only the Netlify build can accept these posts. A local `npm run dev`, a
+ * `vite preview`, a static copy opened from disk — none of them can, and a
+ * post to any of them would either fail or, worse, return a page that looks
+ * like success while the enquiry went nowhere.
+ *
+ * So the build decides. Netlify sets NETLIFY=true in its build environment,
+ * and `vite.config.js` turns that into the flag below. Off it, the enquiry is
+ * handed to the visitor's own mail app, addressed to the studio and written
+ * out, and the form says exactly that rather than claiming it has been sent.
  */
-const ENDPOINT = import.meta.env.VITE_ENQUIRY_ENDPOINT ?? ''
+const ON_NETLIFY = typeof __NETLIFY_FORMS__ !== 'undefined' && __NETLIFY_FORMS__
 
-/** True once an endpoint is configured — the forms word themselves by this. */
-export const isPosted = Boolean(ENDPOINT)
+/** Netlify form names. The hidden copies in index.html use these too. */
+export const FORMS = {
+  contact: 'contact',
+  commission: 'commission',
+}
 
-/** Turns the form's values into the lines of an email, in a sensible order. */
-function composeBody(fields) {
+/** Turns the form's values into the lines of an email, in a readable order. */
+function composeBody(fields, labels) {
   return Object.entries(fields)
     .filter(([, value]) => value != null && value !== '')
-    .map(([label, value]) => `${label}: ${value}`)
+    .map(([key, value]) => `${labels[key] ?? key}: ${value}`)
     .join('\n')
 }
 
@@ -60,7 +67,7 @@ function openMailClient(subject, body) {
   const href = `mailto:${contact.email}?subject=${encodeURIComponent(
     subject,
   )}&body=${encodeURIComponent(body)}`
-  // `location.href` rather than window.open: a popup blocker will swallow the
+  // `location.href` rather than window.open: a popup blocker would swallow the
   // second one, and there is no new page to show either way.
   window.location.href = href
 }
@@ -69,35 +76,32 @@ function openMailClient(subject, body) {
  * Send one enquiry.
  *
  * @param {object} enquiry
- * @param {string} enquiry.subject  what the email is titled
- * @param {object} enquiry.fields   label -> value, in the order to write them
+ * @param {string} enquiry.form     which Netlify form — a value from FORMS
+ * @param {object} enquiry.fields   field name -> value, as the hidden copy lists them
+ * @param {object} enquiry.labels   field name -> how to write it in an email
+ * @param {string} enquiry.subject  the subject line, for the mail-app route
  * @returns {Promise<'posted' | 'mail-client'>} how it actually went out
- * @throws when a configured endpoint refuses the request
+ * @throws when Netlify refuses the submission
  */
-export async function sendEnquiry({ subject, fields }) {
-  const body = composeBody(fields)
-
-  if (!ENDPOINT) {
-    openMailClient(subject, body)
+export async function sendEnquiry({ form, fields, labels = {}, subject }) {
+  if (!ON_NETLIFY) {
+    openMailClient(subject, composeBody(fields, labels))
     return 'mail-client'
   }
 
-  const response = await fetch(ENDPOINT, {
+  const body = new URLSearchParams({ 'form-name': form })
+  for (const [key, value] of Object.entries(fields)) {
+    body.append(key, value ?? '')
+  }
+
+  const response = await fetch('/', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({
-      // Most form services read these two by name for the notification email.
-      subject,
-      to: contact.email,
-      // If you use Web3Forms, add your key here:
-      // access_key: import.meta.env.VITE_ENQUIRY_KEY,
-      ...fields,
-      message: body,
-    }),
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
   })
 
   if (!response.ok) {
-    throw new Error(`Enquiry endpoint returned ${response.status}`)
+    throw new Error(`Netlify returned ${response.status}`)
   }
 
   return 'posted'

@@ -1,0 +1,14 @@
+# Netlify build settings. The form notification address is NOT set here —
+# it lives in the Netlify UI, under
+# Site configuration → Forms → Form notifications → Email notification.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Client-side routing: every path that is not a real file serves the app,
+# which then reads the URL itself. Mirrors public/_redirects.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -32,6 +32,39 @@
     />
   </head>
   <body>
+    <!--
+      Netlify finds forms by reading this file at deploy time. The real forms
+      are rendered by React, which that reader never runs, so each one has a
+      hidden copy here listing every field by name. These are what Netlify
+      registers; the React forms post back to them by `form-name`.
+
+      Add a field to a form and add it here too, or it arrives blank.
+      `bot-field` is a honeypot: no person sees it, so anything that fills it
+      in is discarded. See src/lib/enquiry.js.
+    -->
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <form name="commission" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="commission" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="pieceType" />
+      <input type="text" name="size" />
+      <input type="text" name="budget" />
+      <input type="text" name="timeline" />
+      <textarea name="description"></textarea>
+      <input type="text" name="reference" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

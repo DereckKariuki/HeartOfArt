@@ -7,7 +7,7 @@ import {
 } from '../../data/commissions'
 import { email, minLength, phone, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
-import { sendEnquiry } from '../../lib/enquiry'
+import { FORMS, sendEnquiry } from '../../lib/enquiry'
 import { contact } from '../../data/site'
 import { Field, FileField, FormError, FormSuccess, Select, TextArea } from '../ui/Field'
 import Button from '../ui/Button'
@@ -45,21 +45,35 @@ export default function CommissionForm() {
     onSubmit: async (values) => {
       setRoute(
         await sendEnquiry({
+          form: FORMS.commission,
           subject: `Commission enquiry: ${values.size}`,
+          // Keys are the field names Netlify registered; labels are how they
+          // read when the enquiry goes out through a mail app instead.
           fields: {
-            Name: values.name,
-            Email: values.email,
-            Phone: values.phone,
-            'Type of piece': values.pieceType,
-            Size: values.size,
-            Budget: values.budget,
-            Timeline: values.timeline,
-            Brief: values.description,
-            // The file itself cannot travel in an email the browser composes,
-            // so name it and ask for it in the reply rather than lose it.
-            'Reference image': values.reference
+            name: values.name,
+            email: values.email,
+            phone: values.phone,
+            pieceType: values.pieceType,
+            size: values.size,
+            budget: values.budget,
+            timeline: values.timeline,
+            description: values.description,
+            // The file itself travels by neither route, so name it and ask
+            // for it in the reply rather than lose it silently.
+            reference: values.reference
               ? `${values.reference.name} — please attach when you reply`
               : '',
+          },
+          labels: {
+            name: 'Name',
+            email: 'Email',
+            phone: 'Phone',
+            pieceType: 'Type of piece',
+            size: 'Size',
+            budget: 'Budget',
+            timeline: 'Timeline',
+            description: 'Brief',
+            reference: 'Reference image',
           },
         }),
       )
