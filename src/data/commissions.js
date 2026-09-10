@@ -115,9 +115,11 @@ export const budgetRanges = [
 
 export const timelines = [
   'No fixed date',
-  'Within 6 weeks',
-  'Within 3 months',
-  'Within 6 months',
+  'Within one week',
+  'Within three weeks',
+  'Within a month',
+  'Within one and a half months',
+  'Within two months',
   'A specific date — I will explain',
 ]
 
