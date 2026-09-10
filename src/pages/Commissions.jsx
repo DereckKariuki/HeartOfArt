@@ -195,12 +195,12 @@ function Enquiry() {
           <Reveal className="lg:col-span-4">
             <p className="label mb-6">Enquiry</p>
             <h2 className="font-serif text-[clamp(1.9rem,4.4vw,3rem)] font-light leading-[1.15] text-ink">
-              Tell me about the room
+              Tell me about the piece
             </h2>
             <p className="mt-7 max-w-prose text-[1.0625rem] leading-[1.8] text-muted">
-              The more you can say about where the piece will live, the better the first
-              quote will be. If you are not sure which size fits, say so and describe the
-              wall — I will work it out.
+              The more you can say about what the piece will speak, the better the first
+              quote will be. If you are not sure which size fits, say so and tell me what
+              you have in mind — I will work it out.
             </p>
           </Reveal>
           <div className="lg:col-span-7 lg:col-start-6">
