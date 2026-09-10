@@ -71,28 +71,29 @@ export const commissionSteps = [
   },
 ]
 
-// REPLACE: swap in real progress photography when you have it.
-// Leave `progressGallery` empty and the section drops out of the page.
+// The four stages of "Forgotten" (charcoal on paper, 2026), photographed in
+// the studio as it was made. Empty this array and the section drops out of
+// the page.
 export const progressGallery = [
   {
     src: '/images/commission-progress/commission-01-first-marks.jpg',
-    alt: 'Commission in progress: the first marks going down',
+    alt: 'The outline of a child at a doorway drawn in light pencil on white paper, before any shading',
     caption: 'First marks',
   },
   {
     src: '/images/commission-progress/commission-02-building-up.jpg',
-    alt: 'Commission in progress: the work building up in layers',
+    alt: 'The same drawing with the face and shoulder shaded in charcoal, the doorway and clothing still bare outline',
     caption: 'Building up',
   },
   {
     src: '/images/commission-progress/commission-03-working-back.jpg',
-    alt: 'Commission in progress: the surface worked back by hand',
+    alt: 'The drawing nearly finished: the shirt, the wall and its rough texture worked in around the child',
     caption: 'Working back',
   },
   {
     src: '/images/commission-progress/commission-04-installed.jpg',
-    alt: 'The finished commissioned piece framed and installed on the wall it was made for',
-    caption: 'Installed',
+    alt: 'The finished drawing behind glass in a dark wood frame, hung on a plain wall',
+    caption: 'Framed',
   },
 ]
 

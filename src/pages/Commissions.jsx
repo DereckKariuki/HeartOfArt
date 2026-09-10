@@ -145,8 +145,8 @@ function ProgressGallery() {
     <section className="mx-auto max-w-shell px-6 py-28 md:px-12 md:py-36 lg:px-16">
       <SectionHeading
         eyebrow="In progress"
-        title="A commission, week by week"
-        standfirst="From the first marks to the wall it was made for."
+        title="From the first marks to the frame"
+        standfirst="Forgotten, charcoal on paper — the four stages every piece goes through, whoever it is for."
       />
       <ul className="mt-20 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
         {progressGallery.map((shot, index) => (
