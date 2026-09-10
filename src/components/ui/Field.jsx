@@ -114,6 +114,27 @@ export function FileField({ label, hint, error, required = false, fileName, ...r
 }
 
 /** The success state every form on the site shares. */
+/**
+ * Shown when a send fails outright. It carries the studio's own address so a
+ * visitor who has just typed out an enquiry does not lose it to a bad
+ * connection — the fallback has to be visible at the moment it is needed.
+ */
+export function FormError({ email, children }) {
+  return (
+    <div
+      role="alert"
+      className="animate-fadeIn border border-ink/25 bg-bone/60 px-6 py-5 text-[1.0625rem] leading-relaxed text-ink"
+    >
+      That did not send — the studio never received it. Try again in a moment,
+      or write straight to{' '}
+      <a href={`mailto:${email}`} className="link-underline">
+        {email}
+      </a>
+      .{children}
+    </div>
+  )
+}
+
 export function FormSuccess({ title, body, children }) {
   return (
     <div

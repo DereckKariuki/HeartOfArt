@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   budgetRanges,
   commissionSizeOptions,
@@ -6,7 +7,9 @@ import {
 } from '../../data/commissions'
 import { email, minLength, phone, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
-import { Field, FileField, FormSuccess, Select, TextArea } from '../ui/Field'
+import { sendEnquiry } from '../../lib/enquiry'
+import { contact } from '../../data/site'
+import { Field, FileField, FormError, FormSuccess, Select, TextArea } from '../ui/Field'
 import Button from '../ui/Button'
 
 const rules = {
@@ -33,18 +36,45 @@ const initialValues = {
 }
 
 export default function CommissionForm() {
+  // How the last send actually went out — the success note has to say which.
+  const [route, setRoute] = useState(null)
+
   const form = useForm({
     initialValues,
     rules,
-    // Placeholder: no live submission. Post `values` to your endpoint here.
-    onSubmit: () => new Promise((resolve) => setTimeout(resolve, 900)),
+    onSubmit: async (values) => {
+      setRoute(
+        await sendEnquiry({
+          subject: `Commission enquiry: ${values.size}`,
+          fields: {
+            Name: values.name,
+            Email: values.email,
+            Phone: values.phone,
+            'Type of piece': values.pieceType,
+            Size: values.size,
+            Budget: values.budget,
+            Timeline: values.timeline,
+            Brief: values.description,
+            // The file itself cannot travel in an email the browser composes,
+            // so name it and ask for it in the reply rather than lose it.
+            'Reference image': values.reference
+              ? `${values.reference.name} — please attach when you reply`
+              : '',
+          },
+        }),
+      )
+    },
   })
 
   if (form.status === 'success') {
     return (
       <FormSuccess
-        title="Your enquiry is in"
-        body="The studio will come back to you within two working days with questions, a direction and a written quote. Nothing is committed until you accept it."
+        title={route === 'posted' ? 'Your enquiry is in' : 'One more step'}
+        body={
+          route === 'posted'
+            ? 'The studio will come back to you within two working days with questions, a direction and a written quote. Nothing is committed until you accept it.'
+            : `Your mail app should have opened with this enquiry written out and addressed to the studio — press send there and it is on its way. If nothing opened, write to ${contact.email}.`
+        }
       >
         <Button type="button" variant="outline" size="small" onClick={form.reset}>
           Send another enquiry
@@ -103,11 +133,13 @@ export default function CommissionForm() {
       <FileField
         label="Reference image"
         accept="image/*"
-        hint="A photograph of the wall, or a piece of mine you are drawn to. Nothing is uploaded from this demo."
+        hint="A photograph of the wall, or a piece of mine you are drawn to. The file is not sent with the form — name it here and attach it to your reply."
         fileName={form.values.reference?.name}
         name="reference"
         onChange={form.handleChange}
       />
+
+      {form.status === 'error' ? <FormError email={contact.email} /> : null}
 
       <Button type="submit" disabled={form.status === 'submitting'}>
         {form.status === 'submitting' ? 'Sending…' : 'Send enquiry'}

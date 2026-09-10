@@ -1,7 +1,9 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { email, minLength, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
-import { Field, FormSuccess, TextArea } from '../ui/Field'
+import { sendEnquiry } from '../../lib/enquiry'
+import { contact } from '../../data/site'
+import { Field, FormError, FormSuccess, TextArea } from '../ui/Field'
 import Button from '../ui/Button'
 
 const rules = {
@@ -17,18 +19,35 @@ export default function ContactForm({ presetSubject = '' }) {
     [presetSubject],
   )
 
+  // How the last send actually went out — the success note has to say which.
+  const [route, setRoute] = useState(null)
+
   const form = useForm({
     initialValues,
     rules,
-    // Placeholder: no live submission. Post `values` to your endpoint here.
-    onSubmit: () => new Promise((resolve) => setTimeout(resolve, 800)),
+    onSubmit: async (values) => {
+      setRoute(
+        await sendEnquiry({
+          subject: values.subject,
+          fields: {
+            Name: values.name,
+            Email: values.email,
+            Message: values.message,
+          },
+        }),
+      )
+    },
   })
 
   if (form.status === 'success') {
     return (
       <FormSuccess
-        title="Message sent"
-        body="Thank you. The studio answers within two working days — sooner if it is about a piece that is available."
+        title={route === 'posted' ? 'Message sent' : 'One more step'}
+        body={
+          route === 'posted'
+            ? 'Thank you. The studio answers within two working days — sooner if it is about a piece that is available.'
+            : `Your mail app should have opened with this enquiry written out and addressed to the studio — press send there and it is on its way. If nothing opened, write to ${contact.email}.`
+        }
       >
         <Button type="button" variant="outline" size="small" onClick={form.reset}>
           Write another
@@ -50,6 +69,8 @@ export default function ContactForm({ presetSubject = '' }) {
         hint="Twenty characters or more."
         {...form.field('message')}
       />
+      {form.status === 'error' ? <FormError email={contact.email} /> : null}
+
       <Button type="submit" disabled={form.status === 'submitting'}>
         {form.status === 'submitting' ? 'Sending…' : 'Send message'}
       </Button>
