@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Check } from 'lucide-react'
-import { framingOptions, getProduct, shippingNote } from '../data/products'
+import { getProduct, shippingNote } from '../data/products'
 import { useCart } from '../context/cart-store'
 import { useCurrency } from '../context/currency-store'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -54,18 +54,15 @@ export default function ProductDetail() {
   const { productId } = useParams()
   const product = getProduct(productId)
 
-  const [imageIndex, setImageIndex] = useState(0)
   const [sizeId, setSizeId] = useState(product?.sizes?.[0]?.id ?? null)
-  const [framingId, setFramingId] = useState('unframed')
   const [added, setAdded] = useState(false)
 
   const { addItem } = useCart()
   const { price } = useCurrency()
 
   const size = product?.sizes?.find((option) => option.id === sizeId) ?? null
-  const framing = framingOptions.find((option) => option.id === framingId)
   const basePrice = size ? size.price : (product?.price ?? 0)
-  const unitPrice = basePrice + (framing?.surcharge ?? 0)
+  const unitPrice = basePrice
   const sold = product?.status === 'sold'
   // A real work whose figure is not set yet: everything about it is for sale
   // except the number, so it takes the enquiry path rather than the cart.
@@ -79,8 +76,8 @@ export default function ProductDetail() {
   })
 
   const lineId = useMemo(
-    () => `${productId}__${sizeId ?? 'one'}__${framingId}`,
-    [productId, sizeId, framingId],
+    () => `${productId}__${sizeId ?? 'one'}`,
+    [productId, sizeId],
   )
 
   if (!product) return <NotFound />
@@ -91,7 +88,6 @@ export default function ProductDetail() {
       productId: product.id,
       title: product.title,
       variantLabel: size ? size.label : product.dimensions,
-      framingLabel: framing.id === 'unframed' ? null : framing.label,
       unitPrice,
       quantity: 1,
       maxQuantity: product.kind === 'original' ? 1 : 10,
@@ -113,42 +109,18 @@ export default function ProductDetail() {
       </Link>
 
       <div className="mt-10 grid items-start gap-14 lg:grid-cols-12 lg:gap-20">
-        {/* Gallery — stays in view while the detail column scrolls past it. */}
+        {/* The work itself. One photograph: the framed and in-room shots were
+            stand-ins for photography that was never taken. */}
         <Reveal className="lg:sticky lg:top-28 lg:col-span-7">
           <ArtImage
-            key={product.images[imageIndex].src}
-            src={product.images[imageIndex].src}
-            alt={product.images[imageIndex].alt}
-            ratio={imageIndex === 0 ? product.ratio : '4/3'}
-            seed={`${product.id}-${imageIndex}`}
-            label={product.images[imageIndex].caption}
+            src={product.images[0].src}
+            alt={product.images[0].alt}
+            ratio={product.ratio}
+            seed={product.id}
+            label={product.images[0].caption}
             priority
             className="shadow-piece"
           />
-          <ul className="mt-5 flex gap-4">
-            {product.images.map((image, index) => (
-              <li key={image.src} className="w-24 sm:w-28">
-                <button
-                  type="button"
-                  onClick={() => setImageIndex(index)}
-                  aria-label={`View: ${image.caption}`}
-                  aria-current={imageIndex === index}
-                  className={`block w-full border p-1 transition-colors duration-500 ${
-                    imageIndex === index ? 'border-accent' : 'border-transparent hover:border-taupe'
-                  }`}
-                >
-                  <ArtImage
-                    src={image.src}
-                    alt=""
-                    ratio="1/1"
-                    seed={`${product.id}-${index}`}
-                    label={image.caption}
-                  />
-                  <span className="label mt-2 block leading-tight">{image.caption}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
         </Reveal>
 
         {/* Detail */}
@@ -165,10 +137,8 @@ export default function ProductDetail() {
             <p className="mt-8 font-serif text-[2rem] font-light tabular-nums text-ink">
               {sold ? 'Sold' : unpriced ? 'Price on request' : price(unitPrice)}
             </p>
-            {!sold && !unpriced && framing.surcharge > 0 ? (
-              <p className="mt-1 text-base text-muted">
-                Includes {price(framing.surcharge)} for framing.
-              </p>
+            {!sold && !unpriced ? (
+              <p className="mt-1 text-base text-muted">Framed and ready to hang.</p>
             ) : null}
 
             <p className="mt-8 max-w-prose text-[1.0625rem] leading-[1.8] text-muted">
@@ -235,17 +205,10 @@ export default function ProductDetail() {
                 />
               ) : null}
 
-              <OptionGroup
-                legend="Framing"
-                name="framing"
-                options={framingOptions}
-                value={framingId}
-                onChange={setFramingId}
-                renderMeta={(option) =>
-                  option.surcharge === 0 ? 'No charge' : `+ ${price(option.surcharge)}`
-                }
-              />
-              <p className="-mt-5 text-base leading-relaxed text-muted">{framing.note}</p>
+              <p className="text-[1.0625rem] leading-relaxed text-muted">
+                Every piece comes framed and ready to hang — no framing to choose, and
+                nothing to arrange once it arrives.
+              </p>
 
               <div>
                 <Button type="button" onClick={handleAdd} size="full">

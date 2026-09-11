@@ -6,8 +6,8 @@ import { CartContext } from './cart-store'
  * no sessionStorage. It survives navigation between routes because the
  * provider sits above the router outlet.
  *
- * A line is identified by product + size + framing, so the same print in
- * two sizes is two lines. Originals are one of one and cap at quantity 1.
+ * A line is identified by product + size, so the same print in two sizes is
+ * two lines. Originals are one of one and cap at quantity 1.
  */
 export function CartProvider({ children }) {
   const [items, setItems] = useState([])

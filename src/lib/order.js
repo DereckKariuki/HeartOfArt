@@ -50,7 +50,7 @@ export function orderWhatsappLink({ items, subtotal, delivery, buyer, format }) 
   const lines = ['New order from heartofart.com', '']
 
   for (const item of items) {
-    const variant = [item.variantLabel, item.framingLabel].filter(Boolean).join(', ')
+    const variant = item.variantLabel
     const quantity = item.quantity > 1 ? ` x${item.quantity}` : ''
     lines.push(
       `- ${item.title}${variant ? ` (${variant})` : ''}${quantity} — ${format(

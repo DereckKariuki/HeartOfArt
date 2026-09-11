@@ -122,7 +122,6 @@ export default function CartDrawer() {
                         </Link>
                         <p className="mt-1 text-base leading-snug text-muted">
                           {item.variantLabel}
-                          {item.framingLabel ? ` · ${item.framingLabel}` : ''}
                         </p>
                       </div>
                       <button

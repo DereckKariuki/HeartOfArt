@@ -1,29 +1,16 @@
 import { artworks, artworkAlt } from './artworks'
 
 /**
- * REPLACE: shop copy, prices and framing costs.
+ * REPLACE: shop copy and prices.
  *
  * Originals are generated from the portfolio so a piece is never
  * described twice. Sold originals stay listed — purchase is disabled,
  * the work stays visible.
  */
 
-// REPLACE: framing options and their surcharges (whole KES).
-export const framingOptions = [
-  { id: 'unframed', label: 'Unframed', surcharge: 0, note: 'Originals arrive stretched and ready to hang; prints ship flat with their margin intact.' },
-  { id: 'oak', label: 'Natural oak float frame', surcharge: 14000, note: 'Hand-finished to order. Adds 3 cm on each side.' },
-  { id: 'ash', label: 'Blackened ash frame', surcharge: 16000, note: 'Matte black, museum glass on works on paper.' },
-]
-
 // REPLACE: your real shipping terms.
 export const shippingNote =
-  'Originals ship rolled or crated depending on size. Local delivery is hand-carried by the studio; countrywide and international orders go by insured courier. Framed work is packed flat in a custom crate.'
-
-const inSituAlt = (piece) =>
-  `${piece.title} hung above a low sideboard in a sunlit room, showing scale`
-
-const framedAlt = (piece) =>
-  `${piece.title} in a natural oak float frame against a pale wall`
+  'Every piece comes framed and ready to hang. Local delivery is hand-carried by the studio; countrywide and international orders go by insured courier, packed flat in a custom crate.'
 
 const originalSource = artworks.filter((piece) => piece.status !== 'print-only')
 
@@ -41,19 +28,7 @@ export const originals = originalSource.map((piece) => ({
   price: piece.price ?? null,
   description: piece.note,
   edition: 'Original, one of one. Signed on the reverse and supplied with a certificate of authenticity.',
-  images: [
-    { src: piece.image, alt: artworkAlt(piece), caption: 'The work' },
-    {
-      src: piece.image.replace('/artwork/', '/artwork-framed/').replace('.jpg', '-framed-oak.jpg'),
-      alt: framedAlt(piece),
-      caption: 'Framed in oak',
-    },
-    {
-      src: piece.image.replace('/artwork/', '/artwork-in-situ/').replace('.jpg', '-in-situ.jpg'),
-      alt: inSituAlt(piece),
-      caption: 'In a room',
-    },
-  ],
+  images: [{ src: piece.image, alt: artworkAlt(piece), caption: 'The work' }],
 }))
 
 // REPLACE: the print catalogue, edition sizes and per-size prices.
@@ -70,7 +45,7 @@ export const prints = [
     status: 'available',
     edition: 'Limited edition of 50 per size. Numbered and signed in pencil in the margin.',
     description:
-      'Printed from a 100-megapixel capture of the original, so the charcoal grain and the tooth of the paper stay legible. A 4 cm unprinted margin is left on every size for framing.',
+      'Printed from a 100-megapixel capture of the original, so the charcoal grain and the tooth of the paper stay legible. A 4 cm unprinted margin is left on every size, and it arrives framed.',
     sizes: [
       { id: 'a3', label: 'A3 — 42 × 30 cm', price: 8000 },
       { id: 'a2', label: 'A2 — 59 × 42 cm', price: 14000 },
@@ -81,16 +56,6 @@ export const prints = [
         src: '/images/print/ocean-view-giclee-print-on-cotton-rag.jpg',
         alt: 'Ocean View giclée print on cotton rag paper, showing the unprinted margin',
         caption: 'The print',
-      },
-      {
-        src: '/images/print/ocean-view-giclee-print-framed-oak.jpg',
-        alt: 'Ocean View print in a natural oak frame against a pale wall',
-        caption: 'Framed in oak',
-      },
-      {
-        src: '/images/print/ocean-view-giclee-print-in-situ.jpg',
-        alt: 'Ocean View print hung above a desk in a sunlit room, showing scale',
-        caption: 'In a room',
       },
     ],
   },

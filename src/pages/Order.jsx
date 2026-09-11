@@ -51,7 +51,6 @@ function OrderSummary({ items, subtotal, deliveryFee, total }) {
               <p className="font-serif text-[1.15rem] leading-tight text-ink">{item.title}</p>
               <p className="mt-1 text-base leading-snug text-muted">
                 {item.variantLabel}
-                {item.framingLabel ? ` · ${item.framingLabel}` : ''}
                 {item.quantity > 1 ? ` · ×${item.quantity}` : ''}
               </p>
             </div>
