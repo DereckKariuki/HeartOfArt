@@ -6,6 +6,12 @@
   command = "npm run build"
   publish = "dist"
 
+# Vite 8 needs Node 20.19+ or 22.12+. Netlify's default has moved before and
+# will again; pinning it here means the build does not start failing on a day
+# nothing in this repo changed.
+[build.environment]
+  NODE_VERSION = "22"
+
 # netlify/functions/submission-created.js runs on every verified form
 # submission and texts the studio. It needs AT_USERNAME, AT_API_KEY and
 # SMS_TO set under Site configuration -> Environment variables; without
