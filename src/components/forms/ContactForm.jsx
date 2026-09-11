@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
 import { email, minLength, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
-import { FORMS, sendEnquiry } from '../../lib/enquiry'
+import { FORMS, sendEnquiry, whatsappLink } from '../../lib/enquiry'
 import { contact } from '../../data/site'
 import { Field, FormError, FormSuccess, TextArea } from '../ui/Field'
+import { Whatsapp } from '../ui/SocialIcons'
 import Button from '../ui/Button'
 
 const rules = {
@@ -14,7 +15,27 @@ const rules = {
 }
 
 export default function ContactForm({ presetSubject = '' }) {
-  const initialValues = useMemo(
+  /**
+ * The enquiry, described once. The form posts it and the WhatsApp link
+ * carries it, so neither route can drift from the other.
+ *
+ * Keys are the field names Netlify registered; labels are how each reads
+ * when the enquiry travels as a written message instead.
+ */
+function enquiryFrom(values) {
+  return {
+    subject: values.subject || 'Enquiry from the website',
+    fields: {
+      name: values.name,
+      email: values.email,
+      subject: values.subject,
+      message: values.message,
+    },
+    labels: { name: 'Name', email: 'Email', message: 'Message' },
+  }
+}
+
+const initialValues = useMemo(
     () => ({ name: '', email: '', subject: presetSubject, message: '' }),
     [presetSubject],
   )
@@ -26,21 +47,7 @@ export default function ContactForm({ presetSubject = '' }) {
     initialValues,
     rules,
     onSubmit: async (values) => {
-      setRoute(
-        await sendEnquiry({
-          form: FORMS.contact,
-          subject: values.subject,
-          // Keys are the field names Netlify registered; labels are how they
-          // read when the enquiry goes out through a mail app instead.
-          fields: {
-            name: values.name,
-            email: values.email,
-            subject: values.subject,
-            message: values.message,
-          },
-          labels: { name: 'Name', email: 'Email', message: 'Message' },
-        }),
-      )
+      setRoute(await sendEnquiry({ form: FORMS.contact, ...enquiryFrom(values) }))
     },
   })
 
@@ -76,9 +83,20 @@ export default function ContactForm({ presetSubject = '' }) {
       />
       {form.status === 'error' ? <FormError email={contact.email} /> : null}
 
-      <Button type="submit" disabled={form.status === 'submitting'}>
-        {form.status === 'submitting' ? 'Sending…' : 'Send message'}
-      </Button>
+      <div className="flex flex-wrap items-center gap-4">
+        <Button type="submit" disabled={form.status === 'submitting'}>
+          {form.status === 'submitting' ? 'Sending…' : 'Send message'}
+        </Button>
+        <Button
+          href={whatsappLink(enquiryFrom(form.values))}
+          target="_blank"
+          rel="noreferrer"
+          variant="outline"
+        >
+          <Whatsapp aria-hidden="true" size={16} strokeWidth={1.4} />
+          Send on WhatsApp
+        </Button>
+      </div>
     </form>
   )
 }

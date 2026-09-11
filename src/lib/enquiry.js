@@ -55,11 +55,17 @@ export const FORMS = {
   commission: 'commission',
 }
 
-/** Turns the form's values into the lines of an email, in a readable order. */
-function composeBody(fields, labels) {
+/**
+ * Turns the form's values into readable lines, in the order given.
+ *
+ * `labels` decides both what is written and how: a field with no label is
+ * left out. That is how the contact form keeps its subject out of the body —
+ * it is already the subject line, and repeating it reads like a mistake.
+ */
+export function composeBody(fields, labels) {
   return Object.entries(fields)
-    .filter(([, value]) => value != null && value !== '')
-    .map(([key, value]) => `${labels[key] ?? key}: ${value}`)
+    .filter(([key, value]) => labels[key] && value != null && value !== '')
+    .map(([key, value]) => `${labels[key]}: ${value}`)
     .join('\n')
 }
 
@@ -105,4 +111,19 @@ export async function sendEnquiry({ form, fields, labels = {}, subject }) {
   }
 
   return 'posted'
+}
+
+/**
+ * A WhatsApp link carrying the same enquiry, for visitors who would rather
+ * chat than write an email — and for anyone whose device has no mail app.
+ *
+ * Nothing sits in the middle: it opens WhatsApp with the message written out
+ * and addressed to the studio, and the visitor presses send there. An empty
+ * form still gets an opening line, because the whole point of this route is
+ * that it asks less of people than the form does.
+ */
+export function whatsappLink({ subject, fields, labels = {} }) {
+  const body = composeBody(fields, labels)
+  const text = body ? `${subject}\n\n${body}` : `${subject}\n\nHello HeartOfArt —`
+  return `${contact.whatsappHref}?text=${encodeURIComponent(text)}`
 }

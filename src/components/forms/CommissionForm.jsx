@@ -7,9 +7,10 @@ import {
 } from '../../data/commissions'
 import { email, minLength, phone, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
-import { FORMS, sendEnquiry } from '../../lib/enquiry'
+import { FORMS, sendEnquiry, whatsappLink } from '../../lib/enquiry'
 import { contact } from '../../data/site'
 import { Field, FileField, FormError, FormSuccess, Select, TextArea } from '../ui/Field'
+import { Whatsapp } from '../ui/SocialIcons'
 import Button from '../ui/Button'
 
 const rules = {
@@ -21,6 +22,45 @@ const rules = {
   budget: required('Budget range'),
   timeline: required('Timeline'),
   description: minLength('A short description', 30),
+}
+
+/**
+ * The enquiry, described once. The form posts it and the WhatsApp link
+ * carries it, so neither route can drift from the other.
+ *
+ * Keys are the field names Netlify registered; labels are how each reads
+ * when the enquiry travels as a written message instead.
+ */
+function enquiryFrom(values) {
+  return {
+    subject: values.size ? `Commission enquiry: ${values.size}` : 'Commission enquiry',
+    fields: {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      pieceType: values.pieceType,
+      size: values.size,
+      budget: values.budget,
+      timeline: values.timeline,
+      description: values.description,
+      // The file travels by no route, so name it and ask for it in the reply
+      // rather than lose it silently.
+      reference: values.reference
+        ? `${values.reference.name} — please attach when you reply`
+        : '',
+    },
+    labels: {
+      name: 'Name',
+      email: 'Email',
+      phone: 'Phone',
+      pieceType: 'Type of piece',
+      size: 'Size',
+      budget: 'Budget',
+      timeline: 'Timeline',
+      description: 'Brief',
+      reference: 'Reference image',
+    },
+  }
 }
 
 const initialValues = {
@@ -43,40 +83,7 @@ export default function CommissionForm() {
     initialValues,
     rules,
     onSubmit: async (values) => {
-      setRoute(
-        await sendEnquiry({
-          form: FORMS.commission,
-          subject: `Commission enquiry: ${values.size}`,
-          // Keys are the field names Netlify registered; labels are how they
-          // read when the enquiry goes out through a mail app instead.
-          fields: {
-            name: values.name,
-            email: values.email,
-            phone: values.phone,
-            pieceType: values.pieceType,
-            size: values.size,
-            budget: values.budget,
-            timeline: values.timeline,
-            description: values.description,
-            // The file itself travels by neither route, so name it and ask
-            // for it in the reply rather than lose it silently.
-            reference: values.reference
-              ? `${values.reference.name} — please attach when you reply`
-              : '',
-          },
-          labels: {
-            name: 'Name',
-            email: 'Email',
-            phone: 'Phone',
-            pieceType: 'Type of piece',
-            size: 'Size',
-            budget: 'Budget',
-            timeline: 'Timeline',
-            description: 'Brief',
-            reference: 'Reference image',
-          },
-        }),
-      )
+      setRoute(await sendEnquiry({ form: FORMS.commission, ...enquiryFrom(values) }))
     },
   })
 
@@ -155,9 +162,20 @@ export default function CommissionForm() {
 
       {form.status === 'error' ? <FormError email={contact.email} /> : null}
 
-      <Button type="submit" disabled={form.status === 'submitting'}>
-        {form.status === 'submitting' ? 'Sending…' : 'Send enquiry'}
-      </Button>
+      <div className="flex flex-wrap items-center gap-4">
+        <Button type="submit" disabled={form.status === 'submitting'}>
+          {form.status === 'submitting' ? 'Sending…' : 'Send enquiry'}
+        </Button>
+        <Button
+          href={whatsappLink(enquiryFrom(form.values))}
+          target="_blank"
+          rel="noreferrer"
+          variant="outline"
+        >
+          <Whatsapp aria-hidden="true" size={16} strokeWidth={1.4} />
+          Send on WhatsApp
+        </Button>
+      </div>
     </form>
   )
 }

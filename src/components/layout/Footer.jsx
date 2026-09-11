@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Mail, MessageCircle, Phone } from 'lucide-react'
-import { Instagram, Tiktok, Youtube } from '../ui/SocialIcons'
+import { Mail, Phone } from 'lucide-react'
+import { Instagram, Tiktok, Whatsapp, Youtube } from '../ui/SocialIcons'
 import { contact, nav, site } from '../../data/site'
 import Logo from '../ui/Logo'
 import Wordmark from '../ui/Wordmark'
@@ -9,7 +9,7 @@ const socials = [
   { href: contact.instagramHref, label: `Instagram, ${contact.instagram}`, Icon: Instagram },
   { href: contact.youtubeHref, label: `YouTube, ${contact.youtube}`, Icon: Youtube },
   { href: contact.tiktokHref, label: `TikTok, ${contact.tiktok}`, Icon: Tiktok },
-  { href: contact.whatsappHref, label: `WhatsApp, ${contact.whatsapp}`, Icon: MessageCircle },
+  { href: contact.whatsappHref, label: `WhatsApp, ${contact.whatsapp}`, Icon: Whatsapp },
   { href: `mailto:${contact.email}`, label: `Email, ${contact.email}`, Icon: Mail },
   { href: contact.phoneHref, label: `Telephone, ${contact.phone}`, Icon: Phone },
 ]

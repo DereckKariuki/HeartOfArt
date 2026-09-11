@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
-import { Mail, MessageCircle, Phone } from 'lucide-react'
-import { Instagram, Tiktok, Youtube } from '../components/ui/SocialIcons'
+import { Mail, Phone } from 'lucide-react'
+import { Instagram, Tiktok, Whatsapp, Youtube } from '../components/ui/SocialIcons'
 import { commissionTiers } from '../data/commissions'
 import { contact } from '../data/site'
 import { useCurrency } from '../context/currency-store'
@@ -11,7 +11,7 @@ import ContactForm from '../components/forms/ContactForm'
 const channels = [
   { label: 'Email', value: contact.email, href: `mailto:${contact.email}`, Icon: Mail },
   { label: 'Phone', value: contact.phone, href: contact.phoneHref, Icon: Phone },
-  { label: 'WhatsApp', value: contact.whatsapp, href: contact.whatsappHref, Icon: MessageCircle },
+  { label: 'WhatsApp', value: contact.whatsapp, href: contact.whatsappHref, Icon: Whatsapp },
   { label: 'Instagram', value: contact.instagram, href: contact.instagramHref, Icon: Instagram },
   { label: 'YouTube', value: contact.youtube, href: contact.youtubeHref, Icon: Youtube },
   { label: 'TikTok', value: contact.tiktok, href: contact.tiktokHref, Icon: Tiktok },

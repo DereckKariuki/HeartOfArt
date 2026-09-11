@@ -58,3 +58,13 @@ export function Tiktok(props) {
     </Glyph>
   )
 }
+
+export function Whatsapp(props) {
+  return (
+    <Glyph {...props}>
+      {/* Speech bubble with the tail at the lower left, and the handset. */}
+      <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 21l2-5.5a8.5 8.5 0 0 1-1-4A8.38 8.38 0 0 1 12.5 3a8.38 8.38 0 0 1 8.5 8.5z" />
+      <path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.25 1.75.9-.4 1.6a4.5 4.5 0 0 1-5-1.2 9.6 9.6 0 0 1-2.65-4.2l1.55-.6.9 1.75z" />
+    </Glyph>
+  )
+}
