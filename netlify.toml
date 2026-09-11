@@ -6,6 +6,14 @@
   command = "npm run build"
   publish = "dist"
 
+# netlify/functions/submission-created.js runs on every verified form
+# submission and texts the studio. It needs AT_USERNAME, AT_API_KEY and
+# SMS_TO set under Site configuration -> Environment variables; without
+# them it does nothing and the enquiry still arrives by email.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Client-side routing: every path that is not a real file serves the app,
 # which then reads the URL itself. Mirrors public/_redirects.
 [[redirects]]

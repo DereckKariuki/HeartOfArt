@@ -87,6 +87,33 @@ and the form says so rather than claiming it has been sent.
 A failed send shows the studio's address inline, so a visitor who has just
 typed out an enquiry does not lose it.
 
+### A text when one arrives
+
+`netlify/functions/submission-created.js` runs on every verified submission —
+Netlify triggers it on the file name alone — and texts the studio a one-line
+summary: who is asking, what about, and the number or address to reply to.
+The full enquiry still goes to your email and is stored under Forms; the text
+is a nudge, because every 160 characters is another SMS you pay for.
+
+It needs an [Africa's Talking](https://africastalking.com) account (bills in
+KES, cheap to Kenyan numbers) and four environment variables under
+*Site configuration → Environment variables*:
+
+| Variable | Value |
+| --- | --- |
+| `AT_USERNAME` | your Africa's Talking username (`sandbox` to test) |
+| `AT_API_KEY` | the API key from their dashboard |
+| `SMS_TO` | `+254110025232` |
+| `AT_SENDER_ID` | optional — an approved sender ID or short code |
+
+Set a spend cap while you are in their dashboard. With the variables unset
+the function does nothing and logs that it is off; enquiries still arrive by
+email. A failed text is logged and swallowed — a submission is never failed
+over it, because a lost text must not look like a lost enquiry.
+
+Only `sendSms` knows the provider. Swapping to Twilio means replacing that
+one function.
+
 The reference-image file is not transmitted by either route. The enquiry names
 the file and asks for it in the reply. Real uploads would need Netlify's
 file-upload support and a form encoded as multipart — a separate change.
