@@ -54,30 +54,34 @@ export const artist = {
     'I work from the heart, with the kind of passion and focus that turns an idea into something you feel before you understand it. Because the true measure of a piece isn’t how it looks. It’s what stays with you long after you’ve walked away.',
   ],
   // REPLACE: your own process steps and detail shots.
+  // REPLACE: the four stages in your own words. These describe only what the
+  // photographs beside them show — the sequence is real, the wording is not
+  // yours yet. They reuse the commission-progress photographs of "Forgotten"
+  // rather than a second set.
   process: [
     {
       title: 'Drawing',
-      body: 'Everything begins in charcoal on paper, from life or from memory. Many pieces never go further than this, and are the better for it.',
-      image: '/images/process/charcoal-drawing-on-paper-from-life.jpg',
-      alt: 'A charcoal drawing in progress on paper, pinned to a studio wall',
+      body: 'It starts as an outline in light pencil. The whole composition is set down before a single tone goes anywhere.',
+      image: '/images/commission-progress/commission-01-first-marks.jpg',
+      alt: 'A composition drawn in light pencil outline on white paper, before any shading',
     },
     {
-      title: 'Ground',
-      body: 'A warm underpainting is laid across the whole canvas and left to dry for two days, so the colour that follows never sits on white.',
-      image: '/images/process/warm-underpainting-on-raw-canvas.jpg',
-      alt: 'A warm ochre underpainting drying on raw stretched canvas',
+      title: 'Shading',
+      body: 'Shading begins at the face, where the likeness is decided. The rest of the sheet stays bare outline until that is right.',
+      image: '/images/commission-progress/commission-02-building-up.jpg',
+      alt: 'The face and shoulder shaded in charcoal while the clothing and background remain outline',
     },
     {
-      title: 'Building',
-      body: 'The drawing goes down onto that ground in charcoal, then paint over it, then charcoal again. A piece may go through the cycle a dozen times.',
-      image: '/images/process/charcoal-drawn-over-wet-paint-on-canvas.jpg',
-      alt: 'Hands drawing in charcoal over a wet layer of paint on canvas',
+      title: 'Surroundings',
+      body: 'Then everything around the figure — the clothing, the doorway, the rough of the wall — until it sits inside the scene rather than on top of it.',
+      image: '/images/commission-progress/commission-03-working-back.jpg',
+      alt: 'The drawing nearly finished, with the clothing, doorway and wall texture worked in around the figure',
     },
     {
-      title: 'Finishing',
-      body: 'The last marks are charcoal, worked in by hand and fixed. The piece rests facing the wall for a week before I decide it is done.',
-      image: '/images/process/charcoal-detail-worked-by-hand.jpg',
-      alt: 'Close detail of charcoal marks worked over a painted surface',
+      title: 'Framing',
+      body: 'Framed behind glass — the piece as it will hang.',
+      image: '/images/commission-progress/commission-04-installed.jpg',
+      alt: 'The finished drawing behind glass in a dark wood frame, hung on a plain wall',
     },
   ],
 }

@@ -76,7 +76,7 @@ function Process() {
         <SectionHeading
           eyebrow="Process"
           title="How a piece comes together"
-          standfirst="Four stages, ten to sixteen weeks. The middle two are where most of it happens."
+          standfirst="Four stages, from the first pencil line to the frame. The middle two are where most of the time goes."
         />
         <ul className="mt-20 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
           {artist.process.map((step, index) => (
