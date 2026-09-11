@@ -1,6 +1,6 @@
 /**
  * All prices are stored in KES. USD is a display convenience only —
- * checkout always quotes KES.
+ * orders are always quoted in KES.
  *
  * REPLACE: keep `KES_PER_USD` current, or swap this for a live rate.
  */

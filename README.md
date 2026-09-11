@@ -26,7 +26,7 @@ src/
     products.js     shop: originals (derived from artworks) + print editions
     commissions.js  process steps, pricing tiers, terms, form options
   lib/
-    checkout.js     ← THE ONLY PLACE PAYMENT GOES (see below)
+    order.js        ← delivery methods, and the order-to-WhatsApp message
     format.js       KES/USD formatting and the exchange rate
     validation.js   form rules
     placeholder.js  generates the stand-in images
@@ -34,89 +34,56 @@ src/
   hooks/         reveal-on-scroll, focus trap, per-route meta, forms
   components/    layout · ui · portfolio · shop · cart · forms
   pages/         Home Portfolio Shop ProductDetail Commissions About
-                 Contact Checkout NotFound
+                 Contact Order NotFound
 ```
 
 Nothing in `components/` or `pages/` needs editing to change copy, prices,
 contact details or artwork. It all comes out of `src/data/`.
 
-## Plugging in payment
+## Where orders and enquiries go
 
-`src/lib/checkout.js` exports a single `submitOrder(order)` function. It is the
-only seam between the storefront and money — nothing else in the app touches
-it. The file documents the exact shape of `order`, what it must resolve to, and
-the M-Pesa (Daraja STK push) and Paystack paths, including which half of each
-must stay server-side. Replace the body; the rest of the site is unchanged.
+Everything leaves on WhatsApp. No form on this site posts anywhere, nothing
+is charged here, and the site holds no payment or mail provider key.
 
-Delivery methods and fees live in the same file.
+**Orders.** The cart's "Place an order" leads to `/order`, which asks for a
+name, a phone number and a delivery choice, then hands the whole basket to
+WhatsApp as a written message: each line with its price, the subtotal, the
+delivery fee and the total. Payment and the delivery address are settled in
+the chat. `src/lib/order.js` is the only file that knows any of this — it
+holds the delivery methods and `orderWhatsappLink`.
 
-## Where enquiries go
+**Enquiries.** The contact and commission forms carry a single "Send on
+WhatsApp" button. Fields still validate as you leave them, so a visitor is
+corrected before the message is written, but nothing is submitted: neither
+form has a send button, and both block their own submission so that pressing
+Enter in a field cannot fire an invisible send. `src/lib/enquiry.js` builds
+those messages.
 
-Both forms — contact and commission — send through one function, `sendEnquiry`
-in `src/lib/enquiry.js`. It is the only seam between the site and your inbox,
-the way `checkout.js` is the only seam to money.
+Every route ends the same way: WhatsApp opens with the message written out
+and addressed to the studio, and the visitor presses send there. That press
+cannot be skipped — WhatsApp requires it, and no website can send on a
+visitor's behalf.
 
-Delivery is **Netlify Forms**: Netlify receives the submission and emails it
-on, so no mail provider's API key ever reaches the browser. Three pieces have
-to agree.
+### Currently unused
 
-1. **Netlify finds forms by reading the HTML it is handed at deploy time.**
-   This site renders its forms in JavaScript, which that reader never runs, so
-   `index.html` carries a hidden copy of each form listing every field by name.
-   Those copies are what Netlify registers. **Add a field to a form and add it
-   to the copy too, or it arrives blank.**
-2. **The React form posts the fields back** as `application/x-www-form-urlencoded`
-   with `form-name` naming which form it is. Names must match the hidden copies.
-3. **The notification address is set in Netlify, not in this repo.** After the
-   first deploy: *Site configuration → Forms → Form notifications → Add
-   notification → Email notification*, to `heartofart83@gmail.com`. Netlify
-   stores every submission either way; the notification is what reaches you.
+The site used to send by email, and the wiring is still in the repo but now
+reaches nothing:
 
-`netlify.toml` holds the build command, the publish directory and the SPA
-redirect. Each form carries a honeypot field, `bot-field` — no person sees it,
-so anything that fills it in is discarded.
+- the two hidden forms in `index.html` that Netlify reads at deploy time,
+  and the `__NETLIFY_FORMS__` flag in `vite.config.js`
+- the posted branch of `sendEnquiry` in `src/lib/enquiry.js`
+- `netlify/functions/submission-created.js`, which texts the studio on a form
+  submission — there are no submissions, so it never runs
 
-**Off Netlify**, nothing can accept these posts: not `npm run dev`, not
-`vite preview`, not a static copy on disk. Posting anyway would either fail or
-return a page that looks like success while the enquiry went nowhere. So the
-build decides: Netlify sets `NETLIFY=true` in its build environment, and
-`vite.config.js` bakes that into `__NETLIFY_FORMS__`. Off it, the enquiry is
-handed to the visitor's own mail app, addressed to the studio and written out,
-and the form says so rather than claiming it has been sent.
+Delete them if WhatsApp is the settled answer; restore the send buttons and
+they work again.
 
-A failed send shows the studio's address inline, so a visitor who has just
-typed out an enquiry does not lose it.
+### Taking payment later
 
-### A text when one arrives
-
-`netlify/functions/submission-created.js` runs on every verified submission —
-Netlify triggers it on the file name alone — and texts the studio a one-line
-summary: who is asking, what about, and the number or address to reply to.
-The full enquiry still goes to your email and is stored under Forms; the text
-is a nudge, because every 160 characters is another SMS you pay for.
-
-It needs an [Africa's Talking](https://africastalking.com) account (bills in
-KES, cheap to Kenyan numbers) and four environment variables under
-*Site configuration → Environment variables*:
-
-| Variable | Value |
-| --- | --- |
-| `AT_USERNAME` | your Africa's Talking username (`sandbox` to test) |
-| `AT_API_KEY` | the API key from their dashboard |
-| `SMS_TO` | `+254110025232` |
-| `AT_SENDER_ID` | optional — an approved sender ID or short code |
-
-Set a spend cap while you are in their dashboard. With the variables unset
-the function does nothing and logs that it is off; enquiries still arrive by
-email. A failed text is logged and swallowed — a submission is never failed
-over it, because a lost text must not look like a lost enquiry.
-
-Only `sendSms` knows the provider. Swapping to Twilio means replacing that
-one function.
-
-The reference-image file is not transmitted by either route. The enquiry names
-the file and asks for it in the reply. Real uploads would need Netlify's
-file-upload support and a form encoded as multipart — a separate change.
+`src/lib/order.js` is where that would go. The M-Pesa (Daraja STK push) and
+Paystack notes that used to live there are in the git history, and the rule
+they carried still holds: a browser must never hold a payment key, so the
+charge itself has to happen on a server.
 
 ## Design system
 
@@ -240,7 +207,7 @@ Everything below is currently placeholder and marked `REPLACE:` in the data file
 - **Framing options and surcharges**, and the **shipping note** — `products.js`.
 - **Commission tiers** — the "from" figure, lead time and what each includes;
   plus the four process steps and the terms (turnaround, deposit %, revisions).
-- **Delivery methods and fees** — `lib/checkout.js`.
+- **Delivery methods and fees** — `lib/order.js`.
 - **Exchange rate** — `KES_PER_USD` in `lib/format.js` is hard-coded at 129.
 
 ### 4. Decisions I made that you may want to change
@@ -255,9 +222,9 @@ Everything below is currently placeholder and marked `REPLACE:` in the data file
   `components/ui/Wordmark.jsx`.
 - **Collection names** — *Afternoon Rooms*, *Market Mornings*, *Paper Weather* —
   are invented and drive the portfolio filter.
-- **Forms send to the studio's mail client until an endpoint is set** — see
-  *Where enquiries go* above. The commission form's reference-image field
-  accepts a file and shows its name, but the file is not transmitted either
-  way; the enquiry names it and asks for it in the reply.
+- **Nothing is charged on the site and no form posts anywhere** — every route
+  ends in WhatsApp. See *Where orders and enquiries go* above. The commission
+  form's reference-image field accepts a file and shows its name, but the file
+  is not transmitted; the enquiry names it and asks for it in the reply.
 - **The cart is session-only**, per the brief's no-storage rule: it survives
   navigation between pages but not a browser refresh.

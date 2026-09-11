@@ -5,7 +5,7 @@ import { contact } from '../data/site'
  *
  * This is the one place that decides. Both forms — contact and commission —
  * call `sendEnquiry` and nothing else knows how delivery works, the same way
- * `checkout.js` is the only seam between the storefront and money.
+ * `order.js` is the only seam between the cart and the studio.
  *
  * ---------------------------------------------------------------------------
  * NETLIFY FORMS

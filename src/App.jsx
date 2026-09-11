@@ -9,7 +9,7 @@ import ProductDetail from './pages/ProductDetail'
 import Commissions from './pages/Commissions'
 import About from './pages/About'
 import Contact from './pages/Contact'
-import Checkout from './pages/Checkout'
+import Order from './pages/Order'
 import NotFound from './pages/NotFound'
 
 /**
@@ -30,7 +30,7 @@ export default function App() {
               <Route path="commissions" element={<Commissions />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
-              <Route path="checkout" element={<Checkout />} />
+              <Route path="order" element={<Order />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

@@ -181,16 +181,16 @@ export default function CartDrawer() {
                 </span>
               </div>
               <p className="mt-2 text-base text-muted">
-                Delivery is calculated at checkout. Charged in Kenyan shillings.
+                Delivery is added when you place the order. Prices in Kenyan shillings.
               </p>
               <Button
-                to="/checkout"
+                to="/order"
                 onClick={closeCart}
                 variant="primary"
                 size="full"
                 className="mt-6"
               >
-                Checkout
+                Place an order
               </Button>
               <button
                 type="button"
