@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FAF8F5" />
+    <title>HeartOfArt — Original charcoal and paint works</title>
+    <meta
+      name="description"
+      content="HeartOfArt is the studio of Dereck Kariuki, working in charcoal on paper and paint on canvas. Original work, limited prints and commissions."
+    />
+    <link rel="icon" type="image/png" href="/heartofart-logo.png" />
+    <link rel="apple-touch-icon" href="/heartofart-logo.png" />
+    <!-- Fallback while the real mark is not yet in /public. -->
+    <link rel="icon" type="image/svg+xml" href="/heartofart-mark.svg" />
+    <!-- No canonical is hardcoded: the app sets a self-referential one per
+         route from the real origin. Asserting a domain here that the site
+         is not served from tells search engines the authoritative copy is
+         somewhere else. Add one only once the real domain is settled. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HeartOfArt" />
+    <meta property="og:title" content="HeartOfArt — Original charcoal and paint works" />
+    <meta
+      property="og:description"
+      content="Original charcoal and paint works, limited prints and commissions by Dereck Kariuki."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!--
+      Netlify finds forms by reading this file at deploy time. The real forms
+      are rendered by React, which that reader never runs, so each one has a
+      hidden copy here listing every field by name. These are what Netlify
+      registers; the React forms post back to them by `form-name`.
+
+      Add a field to a form and add it here too, or it arrives blank.
+      `bot-field` is a honeypot: no person sees it, so anything that fills it
+      in is discarded. See src/lib/enquiry.js.
+    -->
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <form name="commission" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="commission" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="pieceType" />
+      <input type="text" name="size" />
+      <input type="text" name="budget" />
+      <input type="text" name="timeline" />
+      <textarea name="description"></textarea>
+      <input type="text" name="reference" />
+    </form>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

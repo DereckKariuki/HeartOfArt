@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans text-base antialiased;
+    margin: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-light;
+    text-wrap: balance;
+  }
+
+  /* Visible, consistent focus for every interactive element. */
+  :focus-visible {
+    outline: 2px solid theme('colors.accentDeep');
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  ::selection {
+    background: theme('colors.accent');
+    color: theme('colors.canvas');
+  }
+
+  /* Honour the OS-level motion preference everywhere, including reveals. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small caps metadata: the site's third typographic voice. */
+  .label {
+    @apply font-sans text-[0.72rem] font-medium uppercase tracking-label text-muted;
+  }
+
+  .hairline {
+    @apply border-0 border-t border-taupe/60;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-gallery;
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    @apply scale-x-100;
+  }
+}
