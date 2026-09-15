@@ -8,52 +8,46 @@ import { contact } from '../data/site'
  * `order.js` is the only seam between the cart and the studio.
  *
  * ---------------------------------------------------------------------------
- * NETLIFY FORMS
+ * WEB3FORMS
  * ---------------------------------------------------------------------------
  *
- * Netlify receives the submission and emails it on, so no mail provider's API
- * key ever reaches the browser. Three things make it work, and all three have
- * to agree:
+ * A browser cannot send email on its own. Web3Forms does it for you: the page
+ * posts the enquiry to their endpoint, they email it to the address the key
+ * belongs to, and the visitor never leaves the page.
  *
- * 1. Netlify finds forms by reading the HTML it is given at deploy time. This
- *    site renders its forms in JavaScript, which that reader never runs — so
- *    `index.html` carries a hidden copy of each form, listing every field by
- *    name. That copy is what Netlify registers. If you add a field to a form,
- *    add it there too or it arrives blank.
+ * The access key is bound, at Web3Forms' end, to one email address. That is
+ * the whole security model, and it is why the key is safe to ship in the page
+ * the way a Firebase key is: someone who copies it can only cause mail to be
+ * sent TO heartofart83@gmail.com. They cannot read a submission, change the
+ * destination, or send as you. Never treat it as a secret that must not leak —
+ * but do keep it out of the repo, so the address is not changed by a pull
+ * request and so a scraper has to work for it.
  *
- * 2. The React form posts the fields back as a normal form encoding, with
- *    `form-name` naming which of the two it is. The names below must match
- *    the hidden copies exactly.
+ * To set it up:
  *
- * 3. The notification address is set in Netlify itself, not here:
- *    Site configuration → Forms → Form notifications → Add notification →
- *    Email notification, sent to heartofart83@gmail.com. Netlify holds the
- *    submissions either way; the notification is what puts them in the inbox.
- *
- * Spam: each form carries a honeypot field called `bot-field`. A person never
- * sees it, so anything that fills it in is discarded.
+ *   1. Go to web3forms.com, enter heartofart83@gmail.com, and they email you
+ *      an access key. No account, no password.
+ *   2. Put it in the build environment as VITE_WEB3FORMS_KEY — on Netlify:
+ *      Site configuration → Environment variables. Locally, a .env.local file
+ *      (git-ignored) does the same for `npm run dev`.
+ *   3. Redeploy. That is all; nothing else in the site changes.
  *
  * ---------------------------------------------------------------------------
- * EVERYWHERE THAT IS NOT NETLIFY
+ * WITH NO KEY SET
  * ---------------------------------------------------------------------------
  *
- * Only the Netlify build can accept these posts. A local `npm run dev`, a
- * `vite preview`, a static copy opened from disk — none of them can, and a
- * post to any of them would either fail or, worse, return a page that looks
- * like success while the enquiry went nowhere.
- *
- * So the build decides. Netlify sets NETLIFY=true in its build environment,
- * and `vite.config.js` turns that into the flag below. Off it, the enquiry is
- * handed to the visitor's own mail app, addressed to the studio and written
- * out, and the form says exactly that rather than claiming it has been sent.
+ * The enquiry is handed to the visitor's own mail app, addressed to the studio
+ * and already written out, and the form says exactly that rather than claiming
+ * it has been sent. So the site is never quietly broken: before the key is
+ * set, enquiries still reach you; after it, they arrive without the visitor
+ * doing anything more.
  */
-const ON_NETLIFY = typeof __NETLIFY_FORMS__ !== 'undefined' && __NETLIFY_FORMS__
+const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? ''
 
-/** Netlify form names. The hidden copies in index.html use these too. */
-export const FORMS = {
-  contact: 'contact',
-  commission: 'commission',
-}
+const ENDPOINT = 'https://api.web3forms.com/submit'
+
+/** True once a key is configured — the forms word their success note by this. */
+export const isPosted = Boolean(ACCESS_KEY)
 
 /**
  * Turns the form's values into readable lines, in the order given.
@@ -82,32 +76,42 @@ function openMailClient(subject, body) {
  * Send one enquiry.
  *
  * @param {object} enquiry
- * @param {string} enquiry.form     which Netlify form — a value from FORMS
- * @param {object} enquiry.fields   field name -> value, as the hidden copy lists them
- * @param {object} enquiry.labels   field name -> how to write it in an email
- * @param {string} enquiry.subject  the subject line, for the mail-app route
+ * @param {object} enquiry.fields   field name -> value, as the email should list them
+ * @param {object} enquiry.labels   field name -> how to write it in the email
+ * @param {string} enquiry.subject  the subject line
+ * @param {string} [enquiry.replyTo] the visitor's address, so Reply goes to them
  * @returns {Promise<'posted' | 'mail-client'>} how it actually went out
- * @throws when Netlify refuses the submission
+ * @throws when Web3Forms refuses the submission
  */
-export async function sendEnquiry({ form, fields, labels = {}, subject }) {
-  if (!ON_NETLIFY) {
-    openMailClient(subject, composeBody(fields, labels))
+export async function sendEnquiry({ fields, labels = {}, subject, replyTo }) {
+  const body = composeBody(fields, labels)
+
+  if (!ACCESS_KEY) {
+    openMailClient(subject, body)
     return 'mail-client'
   }
 
-  const body = new URLSearchParams({ 'form-name': form })
-  for (const [key, value] of Object.entries(fields)) {
-    body.append(key, value ?? '')
-  }
-
-  const response = await fetch('/', {
+  const response = await fetch(ENDPOINT, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body.toString(),
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      access_key: ACCESS_KEY,
+      subject,
+      from_name: 'HeartOfArt website',
+      // Hitting Reply in the inbox answers the visitor, not Web3Forms.
+      ...(replyTo ? { replyto: replyTo } : {}),
+      // The fields individually, so they are searchable in the inbox, and the
+      // same thing written out, because that is what the email body shows.
+      ...fields,
+      message: body,
+    }),
   })
 
-  if (!response.ok) {
-    throw new Error(`Netlify returned ${response.status}`)
+  // Web3Forms answers 200 with { success: false } for a rejected key, so the
+  // status alone is not enough to call this sent.
+  const result = await response.json().catch(() => ({}))
+  if (!response.ok || result.success === false) {
+    throw new Error(result.message || `Web3Forms returned ${response.status}`)
   }
 
   return 'posted'
