@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   budgetRanges,
   commissionSizeOptions,
@@ -6,8 +7,9 @@ import {
 } from '../../data/commissions'
 import { email, minLength, phone, required } from '../../lib/validation'
 import { useForm } from '../../hooks/useForm'
-import { whatsappLink } from '../../lib/enquiry'
-import { Field, FileField, Select, TextArea } from '../ui/Field'
+import { sendEnquiry, whatsappLink } from '../../lib/enquiry'
+import { contact } from '../../data/site'
+import { Field, FileField, FormError, FormSuccess, Select, TextArea } from '../ui/Field'
 import { Whatsapp } from '../ui/SocialIcons'
 import Button from '../ui/Button'
 
@@ -74,21 +76,36 @@ const initialValues = {
 }
 
 export default function CommissionForm() {
+  // How the last send actually went out — the success note has to say which.
+  const [route, setRoute] = useState(null)
+
   const form = useForm({
     initialValues,
     rules,
-    // This form has no send button: WhatsApp is its only route out. Fields
-    // still validate on blur, so the visitor is corrected while filling it
-    // in, but nothing is posted and there is nothing to submit.
+    onSubmit: async (values) => {
+      setRoute(await sendEnquiry({ ...enquiryFrom(values), replyTo: values.email }))
+    },
   })
 
+  if (form.status === 'success') {
+    return (
+      <FormSuccess
+        title={route === 'posted' ? 'Your enquiry is in' : 'One more step'}
+        body={
+          route === 'posted'
+            ? 'The studio will come back to you within two working days with questions, a direction and a written quote. Nothing is committed until you accept it.'
+            : `Your mail app should have opened with this enquiry written out and addressed to the studio — press send there and it is on its way. If nothing opened, write to ${contact.email}.`
+        }
+      >
+        <Button type="button" variant="outline" size="small" onClick={form.reset}>
+          Send another enquiry
+        </Button>
+      </FormSuccess>
+    )
+  }
+
   return (
-    <form
-      onSubmit={(event) => event.preventDefault()}
-      noValidate
-      className="space-y-9"
-      aria-label="Commission enquiry"
-    >
+    <form onSubmit={form.handleSubmit} noValidate className="space-y-9" aria-label="Commission enquiry">
       <div className="grid gap-9 sm:grid-cols-2">
         <Field label="Name" autoComplete="name" {...form.field('name')} />
         <Field label="Email" type="email" autoComplete="email" {...form.field('email')} />
@@ -143,14 +160,22 @@ export default function CommissionForm() {
         onChange={form.handleChange}
       />
 
-      <Button
-        href={whatsappLink(enquiryFrom(form.values))}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <Whatsapp aria-hidden="true" size={16} strokeWidth={1.4} />
-        Send on WhatsApp
-      </Button>
+      {form.status === 'error' ? <FormError email={contact.email} /> : null}
+
+      <div className="flex flex-wrap items-center gap-4">
+        <Button type="submit" disabled={form.status === 'submitting'}>
+          {form.status === 'submitting' ? 'Sending…' : 'Send enquiry'}
+        </Button>
+        <Button
+          href={whatsappLink(enquiryFrom(form.values))}
+          target="_blank"
+          rel="noreferrer"
+          variant="outline"
+        >
+          <Whatsapp aria-hidden="true" size={16} strokeWidth={1.4} />
+          Send on WhatsApp
+        </Button>
+      </div>
     </form>
   )
 }

@@ -1,6 +1,8 @@
-# Netlify build settings. The form notification address is NOT set here —
-# it lives in the Netlify UI, under
-# Site configuration → Forms → Form notifications → Email notification.
+# Netlify build settings.
+#
+# Enquiries do NOT go through Netlify Forms — they go to Web3Forms, which
+# needs VITE_WEB3FORMS_KEY set under Site configuration -> Environment
+# variables. See src/lib/enquiry.js.
 
 [build]
   command = "npm run build"
@@ -12,10 +14,10 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# netlify/functions/submission-created.js runs on every verified form
-# submission and texts the studio. It needs AT_USERNAME, AT_API_KEY and
-# SMS_TO set under Site configuration -> Environment variables; without
-# them it does nothing and the enquiry still arrives by email.
+# netlify/functions/submission-created.js was written for Netlify Forms and
+# fires on a Netlify form submission. Nothing posts to Netlify Forms any
+# more, so it never runs. Kept because the SMS logic inside it is still
+# good; delete it, or rewire it to a Web3Forms webhook, when you decide.
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

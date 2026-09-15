@@ -52,31 +52,42 @@ delivery fee and the total. Payment and the delivery address are settled in
 the chat. `src/lib/order.js` is the only file that knows any of this — it
 holds the delivery methods and `orderWhatsappLink`.
 
-**Enquiries.** The contact and commission forms carry a single "Send on
-WhatsApp" button. Fields still validate as you leave them, so a visitor is
-corrected before the message is written, but nothing is submitted: neither
-form has a send button, and both block their own submission so that pressing
-Enter in a field cannot fire an invisible send. `src/lib/enquiry.js` builds
-those messages.
+**Enquiries.** The contact and commission forms each have two buttons. **Send**
+posts the enquiry to [Web3Forms](https://web3forms.com), which emails it to
+heartofart83@gmail.com — the visitor never leaves the page. **Send on WhatsApp**
+opens WhatsApp with the same enquiry written out, for anyone who would rather
+chat. `src/lib/enquiry.js` is the only file that knows either route.
 
-Every route ends the same way: WhatsApp opens with the message written out
-and addressed to the studio, and the visitor presses send there. That press
-cannot be skipped — WhatsApp requires it, and no website can send on a
-visitor's behalf.
+Web3Forms needs one environment variable, `VITE_WEB3FORMS_KEY`:
+
+1. Go to [web3forms.com](https://web3forms.com), enter heartofart83@gmail.com,
+   and they email you an access key. No account, no password.
+2. Set it on Netlify under *Site configuration → Environment variables*, and
+   locally in a `.env.local` file (git-ignored — see `.env.example`).
+3. Redeploy.
+
+The key is bound at their end to that one address. That is the whole security
+model, and it is why the key is safe in the built page the way a Firebase key
+is: whoever copies it can only cause mail to be sent **to** you — they cannot
+read a submission, change the destination, or send as you. Keep it out of the
+repo all the same, so the address cannot be changed by a pull request.
+
+**With no key set**, a send hands the enquiry to the visitor's own mail app,
+addressed to the studio and written out, and the form says exactly that rather
+than claiming it has gone. So the site is never quietly broken: before the key
+is set enquiries still reach you, after it they arrive by themselves.
+
+Web3Forms answers `200` with `{ success: false }` for a bad key, so the status
+code alone is not treated as sent. A failed send shows the studio's address
+inline, with what the visitor typed still in the form.
 
 ### Currently unused
 
-The site used to send by email, and the wiring is still in the repo but now
-reaches nothing:
-
-- the two hidden forms in `index.html` that Netlify reads at deploy time,
-  and the `__NETLIFY_FORMS__` flag in `vite.config.js`
-- the posted branch of `sendEnquiry` in `src/lib/enquiry.js`
-- `netlify/functions/submission-created.js`, which texts the studio on a form
-  submission — there are no submissions, so it never runs
-
-Delete them if WhatsApp is the settled answer; restore the send buttons and
-they work again.
+`netlify/functions/submission-created.js` texts the studio on a form
+submission, and fires on a *Netlify Forms* submission specifically. Enquiries
+go to Web3Forms now, so it never runs. It is kept because the SMS logic in it
+is still sound — delete it, or rewire it to a Web3Forms webhook, when you
+decide which.
 
 ### Taking payment later
 
